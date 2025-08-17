@@ -18,17 +18,17 @@
   <link rel="icon" type="image/png" href="images/favicon.png"/>
 
   <style>
-    /* ========== THEME & MOTION (Material/Flutter-like) ========== */
+    /* ============ THEME ============ */
     :root{
-      --bg:#0f172a;                 /* slate-900 */
-      --text:#e5e7eb;               /* gray-200 */
-      --muted:#9ca3af;              /* gray-400 */
-      --primary:#ff7a6e;            /* coral */
-      --primary-2:#ff4b3e;
+      --bg:#0b1024;                /* deep blue */
+      --bg-2:#0f172a;              /* slate-900 */
+      --text:#e5e7eb;              /* gray-200 */
+      --muted:#a1a8b8;             /* gray-400/300 mix */
+      --primary:#ff7a6e;           /* coral */
+      --primary-2:#ff4b3e;         /* deeper coral */
+      --accent:#8b5cf6;            /* violet */
       --line:rgba(255,255,255,.14);
       --glass:rgba(255,255,255,.06);
-      --curve-standard:cubic-bezier(.4,0,.2,1);       /* fastOutSlowIn */
-      --curve-emphasized:cubic-bezier(.2,0,0,1);      /* emphasized */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -43,19 +43,33 @@
     a{color:var(--primary)}
     a:hover{color:var(--primary-2); text-decoration:none}
 
-    /* Animated gradient mesh background */
+    /* ============ BACKGROUND MAGIC ============ */
+    /* Animated gradient mesh */
     .mesh{
-      position:fixed; inset:-20vmax; z-index:-3; filter:blur(70px); opacity:.9;
+      position:fixed; inset:-25vmax; z-index:-3; filter:blur(80px); opacity:.95;
       background:
-        radial-gradient(48vmax 48vmax at 12% 18%, #1e3a8a 0%, transparent 60%),
+        radial-gradient(50vmax 50vmax at 12% 18%, #1e3a8a 0%, transparent 60%),
         radial-gradient(40vmax 40vmax at 88% 12%, #6d28d9 0%, transparent 60%),
-        radial-gradient(42vmax 42vmax at 32% 92%, #2563eb 0%, transparent 60%),
+        radial-gradient(42vmax 42vmax at 30% 92%, #2563eb 0%, transparent 60%),
         radial-gradient(36vmax 36vmax at 86% 82%, #dc2626 0%, transparent 60%);
-      animation: meshMove 20s var(--curve-standard) infinite alternate;
+      animation: meshMove 22s ease-in-out infinite alternate;
     }
-    @keyframes meshMove{
-      0% {transform:translate3d(0,0,0) scale(1)}
-      100%{transform:translate3d(-3vmax,2vmax,0) scale(1.03)}
+    @keyframes meshMove{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3vmax,2vmax,0) scale(1.04)}}
+
+    /* Soft dot grid overlay */
+    .grid-overlay{
+      position:fixed; inset:0; z-index:-2; opacity:.12;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      background-size: 22px 22px;
+      mix-blend-mode: soft-light;
+    }
+
+    /* Cursor glow that follows pointer */
+    .cursor-glow{
+      position:fixed; width:28vmin; height:28vmin; border-radius:50%;
+      background: radial-gradient(circle at center, rgba(255,122,110,.28), transparent 60%);
+      pointer-events:none; z-index:-1; filter:blur(24px); transform:translate(-50%,-50%);
+      transition: opacity .25s ease;
     }
 
     /* Floating orbs */
@@ -67,50 +81,76 @@
     @keyframes float2{50%{transform:translate3d(-12px,8px,0)}}
     @keyframes float3{50%{transform:translate3d(10px,14px,0)}}
 
-    /* NAVBAR + Progress */
-    .navbar{
-      background:rgba(15,23,42,.6);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-      transition:background .3s var(--curve-standard);
-    }
-    .navbar.scrolled{background:rgba(15,23,42,.85)}
-    .navbar-brand{font-weight:800;color:#fff!important}
-    .nav-link{color:var(--text)!important;font-weight:600}
-    .nav-link:hover{color:var(--primary)!important}
+    /* Scroll progress */
     #scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),#ffd369);width:0%;z-index:9999}
 
-    /* HERO */
-    #home{position:relative;min-height:94vh;display:flex;align-items:center}
+    /* ============ NAVBAR ============ */
+    .navbar{
+      background:rgba(10,15,28,.55);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      transition: background .3s ease;
+    }
+    .navbar.scrolled{background:rgba(10,15,28,.9)}
+    .navbar-brand{font-weight:800;color:#fff!important}
+    .nav-link{color:var(--text)!important;font-weight:600;position:relative}
+    .nav-link:after{
+      content:""; position:absolute; left:10%; right:90%; bottom:6px; height:2px; background:linear-gradient(90deg,var(--primary),var(--accent));
+      border-radius:2px; transition: all .25s ease;
+    }
+    .nav-link:hover:after{right:10%}
+
+    /* ============ HERO ============ */
+    #home{position:relative;min-height:96vh;display:flex;align-items:center}
     .hero-wrap{width:100%;display:grid;grid-template-columns:1.15fr .85fr;grid-gap:36px;align-items:center}
     @media (max-width:992px){.hero-wrap{grid-template-columns:1fr}}
-    .hero-title{font-size:3.2rem;font-weight:800;margin:0 0 8px}
-    .hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:16px}
-    #typing{color:#ffd369;font-weight:700;min-height:28px;margin-bottom:24px}
     .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
-    .btn-pill{border-radius:999px;padding:12px 22px;transition:transform .2s var(--curve-emphasized)}
+    .hero-title{font-size:3.3rem;font-weight:800;margin:0 0 6px;letter-spacing:.2px}
+    .gradient-text{
+      background: linear-gradient(90deg, #fff, #ffd369 35%, #ff7a6e 70%, #8b5cf6);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      background-size: 200% auto; animation: shine 8s linear infinite;
+    }
+    @keyframes shine{to{background-position:200% center}}
+    .hero-sub{font-size:1.15rem;color:var(--muted);margin-bottom:14px}
+    #typing{color:#ffd369;font-weight:700;min-height:26px;margin-bottom:18px}
+    .btn-pill{border-radius:999px;padding:12px 22px;transition:transform .2s ease}
     .btn-pill:active{transform:scale(.98)}
     .magnetic{display:inline-block;position:relative}
 
-    /* Sections */
-    section{padding:92px 0}
-    .section-head{text-align:center;margin-bottom:50px}
-    .section-head h2{font-size:2.3rem;font-weight:800;margin-bottom:8px}
+    /* ============ SECTIONS ============ */
+    section{padding:96px 0 90px}
+    .section-head{text-align:center;margin-bottom:54px}
+    .section-head h2{font-size:2.35rem;font-weight:800;margin-bottom:8px}
     .section-head p{color:var(--muted);max-width:760px;margin:0 auto}
 
-    /* Cards */
+    /* Section separators (SVG waves) */
+    .divider{
+      display:block; width:100%; height:70px; background:transparent; margin-top:-70px;
+    }
+    .divider svg{display:block; width:100%; height:100%}
+
+    /* ============ CARDS / EFFECTS ============ */
     .card-neo{
-      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
-      border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);
-      transition:transform .25s var(--curve-standard), box-shadow .25s var(--curve-standard);
+      background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+      border:1px solid var(--line); border-radius:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      transition:transform .25s ease, box-shadow .25s ease;
       will-change:transform;
     }
-    .card-neo:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
+    .card-neo:hover{ transform: translateY(-6px); box-shadow:0 14px 40px rgba(0,0,0,.35) }
     .tilt{transform-style:preserve-3d}
 
-    /* About */
-    .avatar{width:100%;border-radius:16px;object-fit:cover;box-shadow:0 18px 50px rgba(0,0,0,.45)}
     .chip{display:inline-block;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fde5e1;padding:6px 10px;border-radius:999px;font-size:.85rem;margin:0 8px 8px 0}
+
+    /* Skills marquee */
+    .marquee{
+      overflow:hidden; white-space:nowrap; border:1px dashed rgba(255,255,255,.12);
+      border-radius:14px; padding:8px 0; position:relative; background:rgba(255,255,255,.03)
+    }
+    .marquee span{display:inline-block; padding:0 18px; animation: slide 18s linear infinite}
+    .marquee:hover span{animation-play-state:paused}
+    @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
     /* Timeline */
     .resume-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-gap:28px}
@@ -127,21 +167,29 @@
     /* Projects */
     .project-card img{width:100%;height:220px;object-fit:cover;border-top-left-radius:18px;border-top-right-radius:18px}
     .project-card .card-body{padding:18px}
+    .project-card .tags small{opacity:.8}
 
     /* Contact */
     .contact-tile{text-align:center;padding:20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
     .contact-tile i{font-size:2rem;color:var(--primary);margin-bottom:10px}
 
+    /* CTA banner */
+    .cta{
+      background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(255,122,110,.18));
+      border:1px solid var(--line); border-radius:20px;
+    }
+
     /* Footer & BTT */
-    footer{border-top:1px solid var(--line);background:rgba(0,0,0,.25)}
-    footer p{color:var(--muted);margin:0}
-    #backToTop{position:fixed;right:22px;bottom:22px;z-index:99;opacity:0;pointer-events:none;transition:opacity .25s var(--curve-standard)}
+    footer{border-top:1px solid var(--line); background:rgba(0,0,0,.25)}
+    footer p{color:var(--muted); margin:0}
+    #backToTop{position:fixed;right:22px;bottom:22px;z-index:99;opacity:0;pointer-events:none;transition:opacity .25s ease}
     #backToTop.show{opacity:1;pointer-events:auto}
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
-      .mesh,.orb{animation:none!important}
+      .mesh,.orb,.marquee span{animation:none!important}
       .tilt,.magnetic{transform:none!important}
+      .cursor-glow{display:none}
     }
     @media (max-width:576px){
       .hero-title{font-size:2.35rem}.hero-sub{font-size:1.05rem}.project-card img{height:180px}
@@ -152,12 +200,14 @@
 <body data-spy="scroll" data-target="#main-nav" data-offset="80">
   <div id="scroll-progress"></div>
   <div class="mesh"></div>
+  <div class="grid-overlay"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
   <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
 
   <!-- NAV -->
   <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
     <div class="container">
-      <a class="navbar-brand" href="#home">Mohammed Suhaib Shabbir</a>
+      <a class="navbar-brand" href="#home">Mohammed <span class="gradient-text">Suhaib</span> Shabbir</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
       </button>
@@ -179,10 +229,18 @@
     <div class="hero-wrap">
       <div>
         <div class="glass p-4 p-md-5 tilt">
-          <h1 class="hero-title">Hello, I'm <span style="color:#ffd369;">Mohammed Suhaib Shabbir</span></h1>
+          <h1 class="hero-title">Hello, I'm <span class="gradient-text">Mohammed Suhaib Shabbir</span></h1>
           <p class="hero-sub">Business & Data Analyst • SQL • Python • Power BI • Tableau</p>
           <div id="typing" aria-live="polite"></div>
-          <div class="mt-2">
+
+          <!-- quick value bullets -->
+          <ul class="mt-2" style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;color:#cbd5e1">
+            <li>✔ KPI dashboards stakeholders use</li>
+            <li>✔ Clean, reliable SQL models</li>
+            <li>✔ Fast ad-hoc insights for execs</li>
+          </ul>
+
+          <div class="mt-3">
             <span class="magnetic">
               <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary btn-pill" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-1"></i> LinkedIn</a>
             </span>
@@ -199,6 +257,12 @@
         </lottie-player>
       </div>
     </div>
+    <!-- Decorative divider -->
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,35 C960,70 1200,20 1440,40 L1440,0 L0,0 Z" fill="url(#g)"></path>
+        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0%" stop-color="#8b5cf6" stop-opacity=".25"/><stop offset="100%" stop-color="#ff7a6e" stop-opacity=".25"/></linearGradient></defs>
+      </svg>
+    </div>
   </header>
 
   <!-- ABOUT -->
@@ -210,11 +274,11 @@
       </div>
       <div class="row align-items-center">
         <div class="col-md-5 mb-4 mb-md-0">
-          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" class="avatar tilt" loading="lazy" decoding="async" width="640" height="640">
+          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" class="img-fluid tilt" style="border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.45)" loading="lazy" decoding="async" width="640" height="640">
         </div>
         <div class="col-md-7">
-          <div class="card-neo p-4">
-            <p class="mb-3">Comfortable partnering with finance, ops, and technical teams to turn ambiguous requirements into reliable data products. If there's a pattern, I’ll find it. If there’s a dashboard, I’ll build it.</p>
+          <div class="card-neo p-4 reveal">
+            <p class="mb-3">I partner with finance, ops, and technical teams to turn ambiguous requirements into reliable data products. If there's a pattern, I’ll find it. If there’s a dashboard, I’ll build it.</p>
             <div class="mb-1">
               <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Power BI</span>
               <span class="chip">Tableau</span><span class="chip">R</span><span class="chip">IBM Cognos</span><span class="chip">Excel (Advanced)</span>
@@ -227,6 +291,11 @@
             </ul>
           </div>
         </div>
+      </div>
+
+      <!-- Skills marquee -->
+      <div class="marquee mt-4" aria-label="Skills marquee">
+        <span>SQL • Python • R • Power BI • Tableau • IBM Cognos • Excel (Advanced) • KPI Design • ETL • Data Modelling • Storytelling • A/B Analysis • SQL • Python • R • Power BI • Tableau • IBM Cognos • Excel (Advanced) • KPI Design • ETL • Data Modelling • Storytelling • A/B Analysis • </span>
       </div>
     </div>
   </section>
@@ -273,10 +342,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Divider -->
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C240,80 480,10 720,35 C960,60 1200,10 1440,30 L1440,0 L0,0 Z" fill="url(#g2)"></path>
+        <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0%" stop-color="#ff7a6e" stop-opacity=".22"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity=".22"/></linearGradient></defs>
+      </svg>
+    </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience">
+  <section id="experience" style="background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03))">
     <div class="container">
       <div class="section-head">
         <h2>Experience</h2>
@@ -284,6 +360,7 @@
       </div>
 
       <div class="resume-grid">
+        <!-- Column A -->
         <div class="timeline">
           <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
@@ -295,6 +372,7 @@
               <li>Built Excel dashboards & compliance-ready reports (advanced formulas & Pivot Tables).</li>
             </ul>
           </div>
+
           <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
             <h4>Sales Advisor</h4>
@@ -307,6 +385,7 @@
           </div>
         </div>
 
+        <!-- Column B -->
         <div class="timeline">
           <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
@@ -318,6 +397,7 @@
               <li>Assisted data migration (5,000+ records) and built automations to cut manual entry ~25%.</li>
             </ul>
           </div>
+
           <div class="resume-item reveal">
             <span class="t-dot"></span>
             <h4>Financial Analyst Intern</h4>
@@ -328,6 +408,7 @@
               <li>Improved visibility of monthly expenses and strengthened internal controls.</li>
             </ul>
           </div>
+
           <div class="resume-item mt-4 reveal">
             <span class="t-dot"></span>
             <h4>Business Analyst Intern</h4>
@@ -338,7 +419,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div><!-- /grid -->
     </div>
   </section>
 
@@ -355,17 +436,22 @@
             <h4>Postgraduate Certificate — Business Insights & Analytics</h4>
             <div class="resume-meta">Humber Polytechnic · Toronto, ON · <span class="text-muted">Sept 2023 – Apr 2025</span></div>
             <p class="mb-2"><span class="badge badge-pill" style="background:#fde68a;color:#7c2d12;">Dean’s List</span></p>
-            <p class="mb-0" style="color:var(--muted)">Coursework: Data Modeling, BI, Advanced Excel, Data Visualization, Python/R for Analytics.</p>
+            <p class="mb-0" style="color:#cbd5e1">Coursework: Data Modeling, BI, Advanced Excel, Data Visualization, Python/R for Analytics.</p>
           </div>
         </div>
         <div class="col-md-6 mb-4">
           <div class="card-neo p-4 h-100 tilt reveal">
             <h4>Bachelor of Business Administration (Finance)</h4>
             <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">2019 – 2022</span></div>
-            <p class="mb-0" style="color:var(--muted)">Focus: Corporate Finance, Management, Operations, Research Methods.</p>
+            <p class="mb-0" style="color:#cbd5e1">Focus: Corporate Finance, Management, Operations, Research Methods.</p>
           </div>
         </div>
       </div>
+    </div>
+    <div class="divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,50 C240,10 480,90 720,40 C960,-10 1200,70 1440,30 L1440,0 L0,0 Z" fill="url(#g3)"></path>
+        <defs><linearGradient id="g3" x1="0" x2="1"><stop offset="0%" stop-color="#8b5cf6" stop-opacity=".25"/><stop offset="100%" stop-color="#ff7a6e" stop-opacity=".25"/></linearGradient></defs>
+      </svg>
     </div>
   </section>
 
@@ -378,32 +464,54 @@
       </div>
       <div class="row">
         <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
+          <div class="card-neo project-card w-100 tilt reveal" data-tags="python">
             <img src="images/FD.jpg" alt="Fraud detection dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
-              <h5 class="mb-2">Fraud Detection in Financial Transactions</h5>
-              <p class="mb-2" style="color:var(--muted)">Python, scikit-learn, Pandas — imbalanced-data pipeline, EDA, feature importance.</p>
-              <a href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+              <h5 class="mb-1">Fraud Detection in Financial Transactions</h5>
+              <p class="mb-2" style="color:#cbd5e1">Python, scikit-learn, Pandas — imbalanced data pipeline, EDA, feature importance.</p>
+              <div class="tags mb-2"><small>#python #ml</small></div>
+              <a href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION" target="_blank" rel="noopener noreferrer">View on GitHub</a> ·
+              <a href="#" data-toggle="modal" data-target="#caseFraud">Case study</a>
             </div>
           </div>
         </div>
         <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
+          <div class="card-neo project-card w-100 tilt reveal" data-tags="bi">
             <img src="images/Retail.jpg" alt="Retail performance analysis dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
-              <h5 class="mb-2">Retail Performance Analysis</h5>
-              <p class="mb-2" style="color:var(--muted)">SPSS + IBM Cognos — segmentation, top-product analysis, interactive dashboards.</p>
+              <h5 class="mb-1">Retail Performance Analysis</h5>
+              <p class="mb-2" style="color:#cbd5e1">SPSS + IBM Cognos — segmentation, top-product analysis, interactive dashboards.</p>
+              <div class="tags mb-2"><small>#cognos #spss #bi</small></div>
               <a href="https://github.com/suhaxbb/Retail-Trends-Analysis-IBM-SPSS-and-IBM-Cognos-Analytics-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
             </div>
           </div>
         </div>
         <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
+          <div class="card-neo project-card w-100 tilt reveal" data-tags="sql bi">
             <img src="images/Bank.jpg" alt="Bank loan analytics dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
-              <h5 class="mb-2">Bank Loan Performance Analytics</h5>
-              <p class="mb-2" style="color:var(--muted)">SQL + Power BI — loan trends, funded amounts, customer profiles.</p>
+              <h5 class="mb-1">Bank Loan Performance Analytics</h5>
+              <p class="mb-2" style="color:#cbd5e1">SQL + Power BI — loan trends, funded amounts, customer profiles.</p>
+              <div class="tags mb-2"><small>#sql #powerbi</small></div>
               <a href="https://github.com/suhaxbb/Bank-Loan-Report-sql-Bi" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study Modal -->
+      <div class="modal fade" id="caseFraud" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content" style="background:#0f172a;color:#e5e7eb;border:1px solid rgba(255,255,255,.14);border-radius:16px">
+            <div class="modal-header">
+              <h5 class="modal-title">Fraud Detection — Case Study</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Context:</strong> High false-positive rates overwhelmed manual reviewers.</p>
+              <p><strong>Actions:</strong> Built features (RFM, velocity, device risk), tuned model, thresholded by precision; created review-queue export.</p>
+              <p><strong>Result:</strong> ~92% of fraud captured at ~3% review rate on demo dataset; fewer false positives.</p>
+              <a class="btn btn-primary btn-pill mt-2" target="_blank" href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION">GitHub</a>
             </div>
           </div>
         </div>
@@ -411,13 +519,22 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT / CTA -->
   <section id="contact">
     <div class="container">
-      <div class="section-head">
-        <h2>Contact</h2>
-        <p>Let’s build something impactful.</p>
+      <div class="cta p-4 p-md-5 mb-4 tilt reveal">
+        <div class="d-md-flex align-items-center justify-content-between">
+          <div class="mb-3 mb-md-0">
+            <h3 class="mb-1">Let’s build something impactful</h3>
+            <p class="mb-0" style="color:#cbd5e1">Open to internships, co-ops, and analyst roles in Toronto.</p>
+          </div>
+          <div>
+            <a href="mailto:suhaib2307@yahoo.com" class="btn btn-primary btn-pill">Email me</a>
+            <a href="tel:+12896005895" class="btn btn-light btn-pill ml-2">Call</a>
+          </div>
+        </div>
       </div>
+
       <div class="row">
         <div class="col-md-4 mb-3">
           <div class="contact-tile h-100 tilt reveal">
@@ -472,7 +589,7 @@
     // Respect reduced motion
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Navbar color on scroll & progress
+    // Navbar & progress
     const nav = document.getElementById('main-nav');
     const progress = document.getElementById('scroll-progress');
     window.addEventListener('scroll', ()=>{
@@ -488,7 +605,7 @@
     });
     btt.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-    // Typing animation (Flutter-like: fastOutSlowIn pacing)
+    // Typing animation
     const typingEl = document.getElementById("typing");
     const texts = ["Business Analytics Postgrad","Data Storyteller","Operations & Finance Savvy","Analytical Strategist"];
     let ti=0, ci=0, del=false;
@@ -503,11 +620,20 @@
     }
     document.addEventListener("DOMContentLoaded", type);
 
-    // GSAP animations (Material motion)
+    // Cursor glow
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e)=>{
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', ()=> glow.style.opacity = 0);
+    document.addEventListener('mouseenter', ()=> glow.style.opacity = 1);
+
+    // GSAP animations
     if (!prefersReduced && window.gsap && window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
 
-      // Parallax hero anim (subtle)
+      // Hero parallax (subtle)
       const heroAnim = document.getElementById('hero-anim');
       window.addEventListener('mousemove', (e)=>{
         const x = (e.clientX / window.innerWidth - .5) * 10;
@@ -515,7 +641,7 @@
         heroAnim.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       });
 
-      // Hero entrance (fastOutSlowIn)
+      // Hero entrance
       gsap.from(".hero-title", {y:24, autoAlpha:0, duration:.9, ease:"power4.out"});
       gsap.from(".hero-sub",   {y:24, autoAlpha:0, duration:.9, ease:"power4.out", delay:.1});
       gsap.from("#typing",     {y:18, autoAlpha:0, duration:.9, ease:"power4.out", delay:.2});
@@ -540,10 +666,10 @@
         w.addEventListener('mouseleave', ()=> gsap.to(btn, {x:0, y:0, duration:.3, ease:"power3.out"}));
       });
 
-      // Tilt cards (3D, with spring back)
+      // Tilt cards (3D)
       const maxTilt = 10;
       document.querySelectorAll('.tilt').forEach(card=>{
-        card.addEventListener('mousemove', e=>{
+        card.addEventListener('mousemove', (e)=>{
           const r = card.getBoundingClientRect();
           const px = (e.clientX - r.left)/r.width;
           const py = (e.clientY - r.top )/r.height;
