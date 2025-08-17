@@ -24,12 +24,12 @@
 
   <style>
     :root{
-      --bg:#0f172a;            /* slate-900 */
-      --bg-soft:#0b1226;       /* deeper slate */
+      --bg:#0f172a;
+      --bg-soft:#0b1226;
       --glass:rgba(255,255,255,.06);
-      --text:#e5e7eb;          /* gray-200 */
-      --muted:#9ca3af;         /* gray-400 */
-      --primary:#ff7a6e;       /* coral */
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --primary:#ff7a6e;
       --primary-2:#ff4b3e;
       --line:rgba(255,255,255,.12);
       --white:#ffffff;
@@ -138,6 +138,9 @@
     footer{border-top:1px solid var(--line); background:rgba(0,0,0,.25);}
     footer p{color:var(--muted); margin:0}
 
+    /* Dark theme fix for Bootstrap's .text-muted (was too dark) */
+    .text-muted{ color:#cbd5e1 !important; }
+
     /* Reduced motion tweaks */
     @media (prefers-reduced-motion: reduce){
       .aos-animate{transition:none !important}
@@ -181,9 +184,8 @@
           </div>
         </div>
       </div>
-      <!-- Animation side (Lottie "Flutter-like" smooth animation) -->
+      <!-- Animation side -->
       <div data-aos="fade-left" data-aos-duration="900" class="text-center">
-        <!-- Lottie Player (swap src with any Lottie you like) -->
         <lottie-player
           src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
           background="transparent" speed="1" style="width:100%; max-width:520px; height:auto;" loop autoplay>
@@ -277,7 +279,7 @@
       <div class="resume-grid">
         <!-- Column A -->
         <div class="timeline">
-          <div class="resume-item mb-4" data-aos="fade-right">
+          <div class="resume-item mb-4">
             <span class="t-dot"></span>
             <h4>Operations Analyst Intern</h4>
             <div class="resume-meta">Fernhill Tax & Advisory (Associates Inc.) · Toronto / Pickering, ON · <span class="text-muted">May 2025 – Aug 2025</span></div>
@@ -288,7 +290,7 @@
             </ul>
           </div>
 
-          <div class="resume-item mb-4" data-aos="fade-right" data-aos-delay="100">
+          <div class="resume-item mb-4">
             <span class="t-dot"></span>
             <h4>Sales Advisor</h4>
             <div class="resume-meta">Sport Chek · Toronto, ON · <span class="text-muted">Nov 2024 – Apr 2025</span></div>
@@ -302,7 +304,7 @@
 
         <!-- Column B -->
         <div class="timeline">
-          <div class="resume-item mb-4" data-aos="fade-left">
+          <div class="resume-item mb-4">
             <span class="t-dot"></span>
             <h4>Business Analyst Intern</h4>
             <div class="resume-meta">Infrability IT Solutions · Hyderabad, India · <span class="text-muted">Sept 2022 – May 2023</span></div>
@@ -313,7 +315,7 @@
             </ul>
           </div>
 
-          <div class="resume-item" data-aos="fade-left" data-aos-delay="100">
+          <div class="resume-item">
             <span class="t-dot"></span>
             <h4>Financial Analyst Intern</h4>
             <div class="resume-meta">Saudi Ericsson · Riyadh, Saudi Arabia · <span class="text-muted">Jun 2021 – Aug 2021</span></div>
@@ -324,7 +326,7 @@
             </ul>
           </div>
 
-          <div class="resume-item mt-4" data-aos="fade-left" data-aos-delay="170">
+          <div class="resume-item mt-4">
             <span class="t-dot"></span>
             <h4>Business Analyst Intern</h4>
             <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">May 2020 – Aug 2020</span></div>
@@ -456,27 +458,43 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-  <!-- GSAP for smooth entrance/parallax-like feel -->
+  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- AOS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
-  <!-- Lottie web player (Flutter-like smooth vector animations) -->
+  <!-- Lottie -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   <script>
-    // Init AOS
-    AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
+    // Init AOS safely (prevents elements staying hidden if AOS fails)
+    (function initAOS() {
+      try {
+        if (window.AOS) {
+          AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
+        } else {
+          document.querySelectorAll('[data-aos]').forEach(el => {
+            el.style.opacity = 1;
+            el.style.transform = 'none';
+          });
+        }
+      } catch (e) {
+        document.querySelectorAll('[data-aos]').forEach(el => {
+          el.style.opacity = 1;
+          el.style.transform = 'none';
+        });
+      }
+    })();
 
-    // GSAP subtle hero entrance
+    // Subtle hero entrance
     gsap.from(".hero-title", {y: 20, opacity: 0, duration: .9, ease:"power3.out"});
     gsap.from(".hero-sub",   {y: 20, opacity: 0, duration: .9, ease:"power3.out", delay:.1});
     gsap.from("#typing",     {y: 14, opacity: 0, duration: .9, ease:"power3.out", delay:.2});
 
-    // Section reveal via GSAP + ScrollTrigger (extra smoothness)
-    const revealUp = document.querySelectorAll(".card-neo, .contact-tile, .resume-item");
+    // Reveal other cards, not resume items (prevents double-hide)
+    const revealUp = document.querySelectorAll(".card-neo, .contact-tile");
     revealUp.forEach((el, i) => {
       gsap.from(el, {
         scrollTrigger: { trigger: el, start: "top 85%" },
