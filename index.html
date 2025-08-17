@@ -15,38 +15,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
-  <!-- AOS (Animate on Scroll) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
-
   <!-- Meta -->
   <meta name="description" content="Business & Data Analyst in Toronto — SQL, Python, Power BI, Tableau. Turning data into decisions."/>
   <link rel="icon" type="image/png" href="images/favicon.png">
 
   <style>
     :root{
-      --bg:#0f172a;
-      --bg-soft:#0b1226;
-      --glass:rgba(255,255,255,.06);
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --primary:#ff7a6e;
+      --bg:#0f172a;            /* slate-900 */
+      --text:#e5e7eb;          /* gray-200 */
+      --muted:#9ca3af;         /* gray-400 */
+      --primary:#ff7a6e;       /* coral */
       --primary-2:#ff4b3e;
-      --line:rgba(255,255,255,.12);
+      --line:rgba(255,255,255,.14);
+      --glass:rgba(255,255,255,.06);
       --white:#ffffff;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       font-family:'Montserrat',sans-serif;
-      background:
-        radial-gradient(1200px 800px at 10% 10%, #1d2a52 0%, transparent 60%),
-        radial-gradient(900px 700px at 90% 20%, #2a1852 0%, transparent 55%),
-        radial-gradient(1000px 800px at 40% 90%, #183a52 0%, transparent 60%),
-        var(--bg);
       color:var(--text);
       line-height:1.65;
       scroll-behavior:smooth;
+      background: var(--bg);
+      overflow-x: hidden;
     }
+
+    /* Animated gradient mesh background */
+    .mesh {
+      position: fixed; inset: -20vmax; z-index: -2; filter: blur(60px); opacity:.85;
+      background:
+        radial-gradient(45vmax 45vmax at 10% 20%, #1b3a7a 0%, transparent 60%),
+        radial-gradient(35vmax 35vmax at 90% 10%, #6121a8 0%, transparent 60%),
+        radial-gradient(40vmax 40vmax at 30% 90%, #1e6aa8 0%, transparent 60%),
+        radial-gradient(30vmax 30vmax at 80% 80%, #a81e5a 0%, transparent 60%);
+      animation: meshMove 18s ease-in-out infinite alternate;
+    }
+    @keyframes meshMove{
+      0% { transform: translate3d(0,0,0) scale(1);}
+      100%{ transform: translate3d(-4vmax, 3vmax, 0) scale(1.03);}
+    }
+
+    /* Floating orbs */
+    .orb { position: fixed; border-radius:50%; mix-blend-mode: screen; pointer-events:none; z-index:-1; opacity:.25; }
+    .orb.one  { width:26vmin;height:26vmin;background:#ff7a6e; top:12%; left:5%; animation: float1 14s ease-in-out infinite;}
+    .orb.two  { width:18vmin;height:18vmin;background:#5f8cff; bottom:10%; right:6%; animation: float2 16s ease-in-out infinite;}
+    .orb.three{ width:22vmin;height:22vmin;background:#8a5fff; top:70%; left:30%; animation: float3 20s ease-in-out infinite;}
+    @keyframes float1{50%{transform:translate3d(18px,-10px,0)}}
+    @keyframes float2{50%{transform:translate3d(-12px,8px,0)}}
+    @keyframes float3{50%{transform:translate3d(10px,14px,0)}}
+
     a{color:var(--primary)}
     a:hover{text-decoration:none;color:var(--primary-2)}
 
@@ -56,49 +74,51 @@
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
     }
-    .navbar-brand{font-weight:700;color:var(--white)!important;}
+    .navbar-brand{font-weight:700;color:#fff!important;}
     .nav-link{color:var(--text)!important; font-weight:500;}
     .nav-link:hover{color:var(--primary)!important;}
+    /* Scroll progress bar */
+    #scroll-progress{
+      position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--primary), #ffd369);
+      width:0%; z-index:9999;
+    }
 
     /* HERO */
-    #home{
-      position:relative; min-height:92vh; display:flex; align-items:center;
-      overflow:hidden;
-    }
-    .hero-wrap{
-      width:100%;
-      display:grid; grid-template-columns:1.1fr .9fr; grid-gap:30px; align-items:center;
-    }
+    #home{ position:relative; min-height:95vh; display:flex; align-items:center; }
+    .hero-wrap{ width:100%; display:grid; grid-template-columns:1.15fr .85fr; grid-gap:36px; align-items:center; }
     @media (max-width:992px){ .hero-wrap{grid-template-columns:1fr} }
-    .hero-title{font-size:3rem;font-weight:700;margin:0 0 10px;}
+    .hero-title{font-size:3.15rem;font-weight:800;margin:0 0 10px;}
     .hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:18px;}
     #typing{color:#ffd369;font-weight:600;min-height:28px;margin-bottom:26px;}
     .glass{
       background:var(--glass);
       border:1px solid var(--line);
       box-shadow:0 10px 40px rgba(0,0,0,.25);
-      border-radius:20px;
+      border-radius:22px;
     }
-    .btn-pill{border-radius:28px; padding:10px 22px;}
+    .btn-pill{border-radius:28px; padding:12px 22px;}
     .btn-shadow{box-shadow:0 6px 22px rgba(0,0,0,.25);}
+    .magnetic{display:inline-block; position:relative;}
 
-    /* SECTION */
-    section{padding:86px 0;}
-    .section-head{text-align:center;margin-bottom:46px;}
-    .section-head h2{font-size:2.2rem;font-weight:700;margin-bottom:6px;}
+    /* Sections */
+    section{padding:90px 0;}
+    .section-head{text-align:center;margin-bottom:50px;}
+    .section-head h2{font-size:2.25rem;font-weight:800;margin-bottom:8px;}
     .section-head p{color:var(--muted);max-width:760px;margin:0 auto;}
 
-    /* CARDS */
+    /* Cards */
     .card-neo{
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:18px;
       box-shadow:0 10px 30px rgba(0,0,0,.25);
       transition: transform .25s ease, box-shadow .25s ease;
+      will-change: transform;
     }
     .card-neo:hover{ transform: translateY(-6px); box-shadow:0 14px 40px rgba(0,0,0,.35); }
+    .tilt{transform-style: preserve-3d;}
 
-    /* ABOUT */
+    /* About */
     .avatar{
       width:100%; border-radius:16px; object-fit:cover;
       box-shadow:0 18px 50px rgba(0,0,0,.45);
@@ -109,46 +129,57 @@
       padding:6px 10px;border-radius:999px;font-size:.85rem;margin:0 8px 8px 0;
     }
 
-    /* TIMELINE */
+    /* Timeline */
+    .resume-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-gap:28px}
+    @media (max-width:992px){ .resume-grid{grid-template-columns:1fr} }
     .timeline{position:relative;padding-left:28px;}
     .timeline:before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--line);}
     .t-dot{
       position:absolute;left:7px;top:10px;width:10px;height:10px;border-radius:50%;background:var(--primary);
       box-shadow:0 0 0 4px rgba(255,122,110,.2);
     }
-    .resume-item{position:relative;padding:22px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.04);}
-    .resume-item h4{font-weight:600;margin-bottom:6px;color:#fff;}
-    .resume-meta{font-size:.95rem;color:var(--muted);margin-bottom:8px;}
+    .resume-item{position:relative;padding:22px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);}
+    .resume-item h4{font-weight:700;margin-bottom:6px;color:#fff;}
+    .resume-meta{font-size:.95rem;color:#cbd5e1;margin-bottom:8px;}
     .resume-item ul{margin:0;padding-left:18px;}
     .resume-item ul li{margin-bottom:6px}
 
-    /* GRID for Experience/Education */
-    .resume-grid{display:grid;grid-template-columns:1.2fr .8fr;grid-gap:26px}
-    @media (max-width:992px){ .resume-grid{grid-template-columns:1fr} }
-
-    /* PROJECTS */
-    .project-card img{width:100%;height:220px;object-fit:cover;border-top-left-radius:16px;border-top-right-radius:16px;}
+    /* Projects */
+    .project-card img{width:100%;height:220px;object-fit:cover;border-top-left-radius:18px;border-top-right-radius:18px;}
     .project-card .card-body{padding:18px;}
 
-    /* CONTACT */
-    .contact-tile{text-align:center;padding:18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);}
+    /* Contact */
+    .contact-tile{text-align:center;padding:20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);}
     .contact-tile i{font-size:2rem;color:var(--primary);margin-bottom:10px;}
 
-    /* FOOTER */
+    /* Footer */
     footer{border-top:1px solid var(--line); background:rgba(0,0,0,.25);}
     footer p{color:var(--muted); margin:0}
 
-    /* Dark theme fix for Bootstrap's .text-muted (was too dark) */
-    .text-muted{ color:#cbd5e1 !important; }
+    /* Back to top */
+    #backToTop{ position:fixed; right:22px; bottom:22px; z-index:99; opacity:0; pointer-events:none; transition:opacity .25s; }
+    #backToTop.show{ opacity:1; pointer-events:auto; }
 
-    /* Reduced motion tweaks */
+    /* Reduced motion: keep everything calm */
     @media (prefers-reduced-motion: reduce){
-      .aos-animate{transition:none !important}
+      .orb, .mesh { animation: none !important; }
+      .tilt, .magnetic { transform: none !important; }
+    }
+
+    /* Small screens */
+    @media (max-width:576px){
+      .hero-title{font-size:2.3rem}
+      .hero-sub{font-size:1.05rem}
+      .project-card img{height:180px}
     }
   </style>
 </head>
 
 <body data-spy="scroll" data-target="#main-nav" data-offset="80">
+  <div id="scroll-progress"></div>
+  <div class="mesh"></div>
+  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+
   <!-- NAV -->
   <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
     <div class="container">
@@ -173,19 +204,23 @@
   <header id="home" class="container">
     <div class="hero-wrap">
       <!-- Text side -->
-      <div data-aos="fade-right" data-aos-duration="900">
-        <div class="glass p-4 p-md-5">
+      <div>
+        <div class="glass p-4 p-md-5 tilt">
           <h1 class="hero-title">Hello, I'm <span style="color:#ffd369;">Mohammed Suhaib Shabbir</span></h1>
           <p class="hero-sub">Business & Data Analyst • SQL • Python • Power BI • Tableau</p>
           <div id="typing" aria-live="polite"></div>
           <div class="mt-2">
-            <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary btn-pill btn-shadow" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-1"></i> LinkedIn</a>
-            <a href="https://github.com/suhaxbb" class="btn btn-light btn-pill btn-shadow ml-2" target="_blank" rel="noopener noreferrer"><i class="fab fa-github mr-1"></i> GitHub</a>
+            <span class="magnetic">
+              <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary btn-pill btn-shadow" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-1"></i> LinkedIn</a>
+            </span>
+            <span class="magnetic ml-2">
+              <a href="https://github.com/suhaxbb" class="btn btn-light btn-pill btn-shadow" target="_blank" rel="noopener noreferrer"><i class="fab fa-github mr-1"></i> GitHub</a>
+            </span>
           </div>
         </div>
       </div>
       <!-- Animation side -->
-      <div data-aos="fade-left" data-aos-duration="900" class="text-center">
+      <div class="text-center" id="hero-anim">
         <lottie-player
           src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
           background="transparent" speed="1" style="width:100%; max-width:520px; height:auto;" loop autoplay>
@@ -197,15 +232,15 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>About Me</h2>
         <p>I turn data into decisions. I blend finance, analytics, and operations to build KPIs, streamline workflows, and deliver dashboards that drive impact.</p>
       </div>
       <div class="row align-items-center">
-        <div class="col-md-5 mb-4 mb-md-0" data-aos="zoom-in" data-aos-duration="800">
-          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" class="avatar" loading="lazy" decoding="async" width="640" height="640">
+        <div class="col-md-5 mb-4 mb-md-0">
+          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" class="avatar tilt" loading="lazy" decoding="async" width="640" height="640">
         </div>
-        <div class="col-md-7" data-aos="fade-left" data-aos-duration="800">
+        <div class="col-md-7">
           <div class="card-neo p-4">
             <p class="mb-3">Comfortable partnering with finance, ops, and technical teams to turn ambiguous requirements into reliable data products. If there's a pattern, I’ll find it. If there’s a dashboard, I’ll build it.</p>
             <div class="mb-1">
@@ -227,13 +262,13 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>Skills</h2>
         <p>Core technical tools, analytics strengths, and professional capabilities.</p>
       </div>
       <div class="row">
-        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="50">
-          <div class="card-neo p-4 h-100">
+        <div class="col-md-4 mb-4">
+          <div class="card-neo p-4 h-100 tilt">
             <h5 class="mb-3">Languages & Tools</h5>
             <div class="d-flex flex-wrap">
               <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">R</span>
@@ -242,8 +277,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-neo p-4 h-100">
+        <div class="col-md-4 mb-4">
+          <div class="card-neo p-4 h-100 tilt">
             <h5 class="mb-3">Data & Analytics</h5>
             <ul class="mb-0">
               <li>Dashboarding & KPI Design</li>
@@ -253,8 +288,8 @@
             </ul>
           </div>
         </div>
-        <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="150">
-          <div class="card-neo p-4 h-100">
+        <div class="col-md-4 mb-4">
+          <div class="card-neo p-4 h-100 tilt">
             <h5 class="mb-3">Soft Skills</h5>
             <ul class="mb-0">
               <li>Stakeholder Collaboration</li>
@@ -271,7 +306,7 @@
   <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>Experience</h2>
         <p>Professional journey — internships and roles.</p>
       </div>
@@ -279,7 +314,7 @@
       <div class="resume-grid">
         <!-- Column A -->
         <div class="timeline">
-          <div class="resume-item mb-4">
+          <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
             <h4>Operations Analyst Intern</h4>
             <div class="resume-meta">Fernhill Tax & Advisory (Associates Inc.) · Toronto / Pickering, ON · <span class="text-muted">May 2025 – Aug 2025</span></div>
@@ -290,7 +325,7 @@
             </ul>
           </div>
 
-          <div class="resume-item mb-4">
+          <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
             <h4>Sales Advisor</h4>
             <div class="resume-meta">Sport Chek · Toronto, ON · <span class="text-muted">Nov 2024 – Apr 2025</span></div>
@@ -304,7 +339,7 @@
 
         <!-- Column B -->
         <div class="timeline">
-          <div class="resume-item mb-4">
+          <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
             <h4>Business Analyst Intern</h4>
             <div class="resume-meta">Infrability IT Solutions · Hyderabad, India · <span class="text-muted">Sept 2022 – May 2023</span></div>
@@ -315,7 +350,7 @@
             </ul>
           </div>
 
-          <div class="resume-item">
+          <div class="resume-item reveal">
             <span class="t-dot"></span>
             <h4>Financial Analyst Intern</h4>
             <div class="resume-meta">Saudi Ericsson · Riyadh, Saudi Arabia · <span class="text-muted">Jun 2021 – Aug 2021</span></div>
@@ -326,7 +361,7 @@
             </ul>
           </div>
 
-          <div class="resume-item mt-4">
+          <div class="resume-item mt-4 reveal">
             <span class="t-dot"></span>
             <h4>Business Analyst Intern</h4>
             <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">May 2020 – Aug 2020</span></div>
@@ -343,21 +378,21 @@
   <!-- EDUCATION -->
   <section id="education">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>Education</h2>
         <p>Academic background and recognition.</p>
       </div>
       <div class="row">
-        <div class="col-md-6 mb-4" data-aos="zoom-in">
-          <div class="card-neo p-4 h-100">
+        <div class="col-md-6 mb-4">
+          <div class="card-neo p-4 h-100 tilt reveal">
             <h4>Postgraduate Certificate — Business Insights & Analytics</h4>
             <div class="resume-meta">Humber Polytechnic · Toronto, ON · <span class="text-muted">Sept 2023 – Apr 2025</span></div>
             <p class="mb-2"><span class="badge badge-pill" style="background:#fde68a;color:#7c2d12;">Dean’s List</span></p>
             <p class="mb-0" style="color:var(--muted)">Coursework: Data Modeling, BI, Advanced Excel, Data Visualization, Python/R for Analytics.</p>
           </div>
         </div>
-        <div class="col-md-6 mb-4" data-aos="zoom-in" data-aos-delay="120">
-          <div class="card-neo p-4 h-100">
+        <div class="col-md-6 mb-4">
+          <div class="card-neo p-4 h-100 tilt reveal">
             <h4>Bachelor of Business Administration (Finance)</h4>
             <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">2019 – 2022</span></div>
             <p class="mb-0" style="color:var(--muted)">Focus: Corporate Finance, Management, Operations, Research Methods.</p>
@@ -370,13 +405,13 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>Projects</h2>
         <p>Selected work that demonstrates real-world analytics and reporting.</p>
       </div>
       <div class="row">
-        <div class="col-md-4 d-flex mb-4" data-aos="fade-up" data-aos-delay="0">
-          <div class="card-neo project-card w-100">
+        <div class="col-md-4 d-flex mb-4">
+          <div class="card-neo project-card w-100 tilt reveal">
             <img src="images/FD.jpg" alt="Fraud detection dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
               <h5 class="mb-2">Fraud Detection in Financial Transactions</h5>
@@ -385,8 +420,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 d-flex mb-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-neo project-card w-100">
+        <div class="col-md-4 d-flex mb-4">
+          <div class="card-neo project-card w-100 tilt reveal">
             <img src="images/Retail.jpg" alt="Retail performance analysis dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
               <h5 class="mb-2">Retail Performance Analysis</h5>
@@ -395,8 +430,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 d-flex mb-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-neo project-card w-100">
+        <div class="col-md-4 d-flex mb-4">
+          <div class="card-neo project-card w-100 tilt reveal">
             <img src="images/Bank.jpg" alt="Bank loan analytics dashboard preview" loading="lazy" decoding="async" width="800" height="450">
             <div class="card-body">
               <h5 class="mb-2">Bank Loan Performance Analytics</h5>
@@ -412,27 +447,27 @@
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
-      <div class="section-head" data-aos="fade-up">
+      <div class="section-head">
         <h2>Contact</h2>
         <p>Let’s build something impactful.</p>
       </div>
       <div class="row">
-        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="0">
-          <div class="contact-tile h-100">
+        <div class="col-md-4 mb-3">
+          <div class="contact-tile h-100 tilt reveal">
             <i class="fas fa-map-marker-alt"></i>
             <h5 class="mt-2 mb-1">Address</h5>
             <p class="mb-0">Toronto, Ontario, Canada</p>
           </div>
         </div>
-        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="100">
-          <div class="contact-tile h-100">
+        <div class="col-md-4 mb-3">
+          <div class="contact-tile h-100 tilt reveal">
             <i class="fas fa-envelope"></i>
             <h5 class="mt-2 mb-1">Email</h5>
             <p class="mb-0"><a href="mailto:suhaib2307@yahoo.com">suhaib2307@yahoo.com</a></p>
           </div>
         </div>
-        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="200">
-          <div class="contact-tile h-100">
+        <div class="col-md-4 mb-3">
+          <div class="contact-tile h-100 tilt reveal">
             <i class="fas fa-phone-alt"></i>
             <h5 class="mt-2 mb-1">Phone</h5>
             <p class="mb-0"><a href="tel:+12896005895">+1 289-600-5895</a></p>
@@ -440,7 +475,7 @@
         </div>
       </div>
 
-      <div class="text-center mt-4" data-aos="fade-up">
+      <div class="text-center mt-4">
         <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" target="_blank" rel="noopener noreferrer" class="mr-3"><i class="fab fa-linkedin fa-2x"></i></a>
         <a href="https://github.com/suhaxbb" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-2x"></i></a>
       </div>
@@ -454,6 +489,9 @@
     </div>
   </footer>
 
+  <!-- Back to Top -->
+  <button id="backToTop" class="btn btn-primary btn-pill btn-shadow"><i class="fas fa-chevron-up"></i></button>
+
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -462,62 +500,93 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <!-- AOS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  <!-- Lottie -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
   <script>
-    // Init AOS safely (prevents elements staying hidden if AOS fails)
-    (function initAOS() {
-      try {
-        if (window.AOS) {
-          AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic' });
-        } else {
-          document.querySelectorAll('[data-aos]').forEach(el => {
-            el.style.opacity = 1;
-            el.style.transform = 'none';
-          });
-        }
-      } catch (e) {
-        document.querySelectorAll('[data-aos]').forEach(el => {
-          el.style.opacity = 1;
-          el.style.transform = 'none';
-        });
-      }
-    })();
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Subtle hero entrance
-    gsap.from(".hero-title", {y: 20, opacity: 0, duration: .9, ease:"power3.out"});
-    gsap.from(".hero-sub",   {y: 20, opacity: 0, duration: .9, ease:"power3.out", delay:.1});
-    gsap.from("#typing",     {y: 14, opacity: 0, duration: .9, ease:"power3.out", delay:.2});
-
-    // Reveal other cards, not resume items (prevents double-hide)
-    const revealUp = document.querySelectorAll(".card-neo, .contact-tile");
-    revealUp.forEach((el, i) => {
-      gsap.from(el, {
-        scrollTrigger: { trigger: el, start: "top 85%" },
-        y: 20, opacity: 0, duration: .6, delay: (i % 5) * 0.05, ease: "power2.out"
-      });
-    });
-
-    // Typing animation with reduced-motion respect
-    const tgt = document.getElementById("typing");
-    const texts = ["Business Analytics Postgrad","Data Storyteller","Operations & Finance Savvy","Analytical Strategist"];
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let ti=0, ci=0, del=false;
-
+    // Typing animation
+    const typingEl = document.getElementById("typing");
+    const typingTexts = ["Business Analytics Postgrad","Data Storyteller","Operations & Finance Savvy","Analytical Strategist"];
+    let tIdx=0, cIdx=0, del=false;
     function type(){
-      if(!tgt) return;
-      if(reduce){ tgt.textContent = texts.join(" • "); return; }
-      const t = texts[ti];
-      tgt.textContent = del ? t.slice(0, --ci) : t.slice(0, ++ci);
-      if(!del && ci === t.length){ del = true; return setTimeout(type, 900); }
-      if(del && ci === 0){ del = false; ti = (ti+1)%texts.length; return setTimeout(type, 280); }
-      setTimeout(type, 85);
+      if(!typingEl) return;
+      if(prefersReduced){ typingEl.textContent = typingTexts.join(" • "); return; }
+      const t = typingTexts[tIdx];
+      typingEl.textContent = del ? t.slice(0, --cIdx) : t.slice(0, ++cIdx);
+      if(!del && cIdx === t.length){ del = true; return setTimeout(type, 900); }
+      if(del && cIdx === 0){ del = false; tIdx = (tIdx+1)%typingTexts.length; return setTimeout(type, 280); }
+      setTimeout(type, 80);
     }
     document.addEventListener("DOMContentLoaded", type);
+
+    // Scroll progress bar
+    const progress = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100;
+      progress.style.width = scrolled + '%';
+    });
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', ()=> {
+      if (window.scrollY > 400) btt.classList.add('show');
+      else btt.classList.remove('show');
+    });
+    btt.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    if (!prefersReduced && window.gsap && window.ScrollTrigger){
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Parallax hero Lottie
+      const heroAnim = document.getElementById('hero-anim');
+      window.addEventListener('mousemove', (e)=>{
+        const x = (e.clientX / window.innerWidth - .5) * 10;
+        const y = (e.clientY / window.innerHeight - .5) * 10;
+        heroAnim.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
+
+      // Reveal on scroll (no hidden class = safe fallback)
+      gsap.utils.toArray('.reveal').forEach((el, i)=>{
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: "top 85%" },
+          y: 24, autoAlpha: 0, duration: .7, ease: "power2.out", delay: (i%5)*0.05
+        });
+      });
+
+      // Subtle hero entrance
+      gsap.from(".hero-title", {y: 20, autoAlpha: 0, duration: .9, ease:"power3.out"});
+      gsap.from(".hero-sub",   {y: 20, autoAlpha: 0, duration: .9, ease:"power3.out", delay:.1});
+      gsap.from("#typing",     {y: 14, autoAlpha: 0, duration: .9, ease:"power3.out", delay:.2});
+
+      // Magnetic buttons
+      document.querySelectorAll('.magnetic').forEach(w => {
+        const btn = w.querySelector('a');
+        w.addEventListener('mousemove', (e)=>{
+          const rect = w.getBoundingClientRect();
+          const dx = (e.clientX - rect.left - rect.width/2)/8;
+          const dy = (e.clientY - rect.top  - rect.height/2)/8;
+          btn.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+        w.addEventListener('mouseleave', ()=> btn.style.transform = `translate(0,0)`);
+      });
+
+      // Tilt cards
+      const maxTilt = 10;
+      document.querySelectorAll('.tilt').forEach(card=>{
+        card.addEventListener('mousemove', (e)=>{
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top)  / r.height;
+          const rx = (py - .5) * -maxTilt;
+          const ry = (px - .5) *  maxTilt;
+          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+        });
+        card.addEventListener('mouseleave', ()=>{
+          card.style.transform = 'rotateX(0) rotateY(0)';
+        });
+      });
+    }
   </script>
 </body>
 </html>
