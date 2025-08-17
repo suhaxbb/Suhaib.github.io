@@ -5,194 +5,646 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio | Mohammed Suhaib Shabbir</title>
 
-  <!-- Bootstrap 4 -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <!-- Meta -->
   <meta name="description" content="Business & Data Analyst in Toronto — SQL, Python, Power BI, Tableau. Turning data into decisions."/>
-  <link rel="icon" type="image/png" href="images/favicon.png">
 
   <style>
     :root{
-      --bg:#0f172a;            /* slate-900 */
-      --text:#e5e7eb;          /* gray-200 */
-      --muted:#9ca3af;         /* gray-400 */
-      --primary:#ff7a6e;       /* coral */
-      --primary-2:#ff4b3e;
-      --line:rgba(255,255,255,.14);
-      --glass:rgba(255,255,255,.06);
-      --white:#ffffff;
+      --bg: #0a0a0f;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --glass: rgba(255,255,255,0.02);
+      --glass-border: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0,0,0,0.4);
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --neon-glow: 0 0 20px rgba(59, 130, 246, 0.3);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      font-family:'Montserrat',sans-serif;
-      color:var(--text);
-      line-height:1.65;
-      scroll-behavior:smooth;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
       overflow-x: hidden;
+      cursor: none;
     }
 
-    /* Animated gradient mesh background */
-    .mesh {
-      position: fixed; inset: -20vmax; z-index: -2; filter: blur(60px); opacity:.85;
-      background:
-        radial-gradient(45vmax 45vmax at 10% 20%, #1b3a7a 0%, transparent 60%),
-        radial-gradient(35vmax 35vmax at 90% 10%, #6121a8 0%, transparent 60%),
-        radial-gradient(40vmax 40vmax at 30% 90%, #1e6aa8 0%, transparent 60%),
-        radial-gradient(30vmax 30vmax at 80% 80%, #a81e5a 0%, transparent 60%);
-      animation: meshMove 18s ease-in-out infinite alternate;
-    }
-    @keyframes meshMove{
-      0% { transform: translate3d(0,0,0) scale(1);}
-      100%{ transform: translate3d(-4vmax, 3vmax, 0) scale(1.03);}
+    /* Custom Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: all 0.1s ease;
+      backdrop-filter: blur(2px);
     }
 
-    /* Floating orbs */
-    .orb { position: fixed; border-radius:50%; mix-blend-mode: screen; pointer-events:none; z-index:-1; opacity:.25; }
-    .orb.one  { width:26vmin;height:26vmin;background:#ff7a6e; top:12%; left:5%; animation: float1 14s ease-in-out infinite;}
-    .orb.two  { width:18vmin;height:18vmin;background:#5f8cff; bottom:10%; right:6%; animation: float2 16s ease-in-out infinite;}
-    .orb.three{ width:22vmin;height:22vmin;background:#8a5fff; top:70%; left:30%; animation: float3 20s ease-in-out infinite;}
-    @keyframes float1{50%{transform:translate3d(18px,-10px,0)}}
-    @keyframes float2{50%{transform:translate3d(-12px,8px,0)}}
-    @keyframes float3{50%{transform:translate3d(10px,14px,0)}}
-
-    a{color:var(--primary)}
-    a:hover{text-decoration:none;color:var(--primary-2)}
-
-    /* NAVBAR */
-    .navbar{
-      background:rgba(10,15,28,.55);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .navbar-brand{font-weight:700;color:#fff!important;}
-    .nav-link{color:var(--text)!important; font-weight:500;}
-    .nav-link:hover{color:var(--primary)!important;}
-    /* Scroll progress bar */
-    #scroll-progress{
-      position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--primary), #ffd369);
-      width:0%; z-index:9999;
+    .cursor-follower {
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.15s ease;
     }
 
-    /* HERO */
-    #home{ position:relative; min-height:95vh; display:flex; align-items:center; }
-    .hero-wrap{ width:100%; display:grid; grid-template-columns:1.15fr .85fr; grid-gap:36px; align-items:center; }
-    @media (max-width:992px){ .hero-wrap{grid-template-columns:1fr} }
-    .hero-title{font-size:3.15rem;font-weight:800;margin:0 0 10px;}
-    .hero-sub{font-size:1.2rem;color:var(--muted);margin-bottom:18px;}
-    #typing{color:#ffd369;font-weight:600;min-height:28px;margin-bottom:26px;}
-    .glass{
-      background:var(--glass);
-      border:1px solid var(--line);
-      box-shadow:0 10px 40px rgba(0,0,0,.25);
-      border-radius:22px;
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      background: radial-gradient(ellipse at top, #1e293b 0%, var(--bg) 50%);
     }
-    .btn-pill{border-radius:28px; padding:12px 22px;}
-    .btn-shadow{box-shadow:0 6px 22px rgba(0,0,0,.25);}
-    .magnetic{display:inline-block; position:relative;}
 
-    /* Sections */
-    section{padding:90px 0;}
-    .section-head{text-align:center;margin-bottom:50px;}
-    .section-head h2{font-size:2.25rem;font-weight:800;margin-bottom:8px;}
-    .section-head p{color:var(--muted);max-width:760px;margin:0 auto;}
-
-    /* Cards */
-    .card-neo{
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      transition: transform .25s ease, box-shadow .25s ease;
-      will-change: transform;
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
     }
-    .card-neo:hover{ transform: translateY(-6px); box-shadow:0 14px 40px rgba(0,0,0,.35); }
-    .tilt{transform-style: preserve-3d;}
 
-    /* About */
-    .avatar{
-      width:100%; border-radius:16px; object-fit:cover;
-      box-shadow:0 18px 50px rgba(0,0,0,.45);
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 15s infinite linear;
     }
-    .chip{
-      display:inline-block; background:rgba(255,255,255,.08);
-      border:1px solid var(--line); color:#fde5e1;
-      padding:6px 10px;border-radius:999px;font-size:.85rem;margin:0 8px 8px 0;
+
+    .shape1 { width: 100px; height: 100px; background: var(--primary); border-radius: 50%; top: 20%; left: 10%; animation-delay: -5s; }
+    .shape2 { width: 60px; height: 60px; background: var(--secondary); border-radius: 30%; top: 60%; left: 80%; animation-delay: -2s; }
+    .shape3 { width: 80px; height: 80px; background: var(--accent); transform: rotate(45deg); top: 30%; left: 70%; animation-delay: -8s; }
+    .shape4 { width: 40px; height: 40px; background: var(--success); border-radius: 50%; top: 80%; left: 20%; animation-delay: -3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(20px) rotate(240deg); }
+    }
+
+    /* Smooth scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.2; }
+    .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); text-align: center; margin-bottom: 4rem; }
+
+    /* Navigation */
+    .navbar {
+      backdrop-filter: blur(20px);
+      background: rgba(10, 10, 15, 0.8);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(10, 10, 15, 0.95);
+      box-shadow: var(--shadow);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-link {
+      color: var(--text) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      padding: 0.5rem 1rem !important;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
+    }
+
+    .nav-link:hover {
+      color: var(--primary) !important;
+      background: rgba(59, 130, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .glass-card:hover::before {
+      left: 100%;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow), var(--neon-glow);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-animation {
+      position: absolute;
+      right: -10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--primary), var(--secondary));
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: pulse 4s ease-in-out infinite, rotate 20s linear infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.1); }
+    }
+
+    @keyframes rotate {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typing Animation */
+    .typing-text {
+      color: var(--accent);
+      font-weight: 600;
+      min-height: 2rem;
+      position: relative;
+    }
+
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Buttons */
+    .btn-glow {
+      background: var(--gradient);
+      border: none;
+      border-radius: 50px;
+      padding: 15px 30px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-glow:hover::before {
+      left: 100%;
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+      color: white;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: 50px;
+      padding: 13px 28px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-outline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    .btn-outline:hover::before {
+      left: 0;
+    }
+
+    .btn-outline:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Skills */
+    .skill-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 25px;
+      margin: 5px;
+      font-weight: 500;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
     }
 
     /* Timeline */
-    .resume-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-gap:28px}
-    @media (max-width:992px){ .resume-grid{grid-template-columns:1fr} }
-    .timeline{position:relative;padding-left:28px;}
-    .timeline:before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--line);}
-    .t-dot{
-      position:absolute;left:7px;top:10px;width:10px;height:10px;border-radius:50%;background:var(--primary);
-      box-shadow:0 0 0 4px rgba(255,122,110,.2);
+    .timeline {
+      position: relative;
+      margin: 0 auto;
+      max-width: 800px;
     }
-    .resume-item{position:relative;padding:22px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.05);}
-    .resume-item h4{font-weight:700;margin-bottom:6px;color:#fff;}
-    .resume-meta{font-size:.95rem;color:#cbd5e1;margin-bottom:8px;}
-    .resume-item ul{margin:0;padding-left:18px;}
-    .resume-item ul li{margin-bottom:6px}
 
-    /* Projects */
-    .project-card img{width:100%;height:220px;object-fit:cover;border-top-left-radius:18px;border-top-right-radius:18px;}
-    .project-card .card-body{padding:18px;}
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gradient);
+      transform: translateX(-50%);
+    }
 
-    /* Contact */
-    .contact-tile{text-align:center;padding:20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);}
-    .contact-tile i{font-size:2rem;color:var(--primary);margin-bottom:10px;}
+    .timeline-item {
+      position: relative;
+      margin: 2rem 0;
+      width: 50%;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+    }
 
-    /* Footer */
-    footer{border-top:1px solid var(--line); background:rgba(0,0,0,.25);}
-    footer p{color:var(--muted); margin:0}
+    .timeline-item.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      padding-right: 3rem;
+      text-align: right;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      padding-left: 3rem;
+      text-align: left;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      right: -13px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: -13px;
+    }
+
+    /* Project Cards */
+    .project-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .project-card:hover {
+      transform: translateY(-15px) rotateX(5deg);
+      box-shadow: var(--shadow), var(--neon-glow);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.1);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    /* Contact Section */
+    .contact-item {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 15px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+    }
+
+    .contact-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover .contact-icon {
+      transform: rotateY(360deg);
+      color: var(--accent);
+    }
+
+    /* Scroll Progress */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient);
+      z-index: 9999;
+      transition: width 0.1s ease;
+    }
 
     /* Back to top */
-    #backToTop{ position:fixed; right:22px; bottom:22px; z-index:99; opacity:0; pointer-events:none; transition:opacity .25s; }
-    #backToTop.show{ opacity:1; pointer-events:auto; }
-
-    /* Reduced motion: keep everything calm */
-    @media (prefers-reduced-motion: reduce){
-      .orb, .mesh { animation: none !important; }
-      .tilt, .magnetic { transform: none !important; }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.4s ease;
+      z-index: 999;
     }
 
-    /* Small screens */
-    @media (max-width:576px){
-      .hero-title{font-size:2.3rem}
-      .hero-sub{font-size:1.05rem}
-      .project-card img{height:180px}
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--secondary);
+      transform: translateY(-5px) scale(1.1);
+      color: white;
+    }
+
+    /* Reveal Animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section spacing */
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-animation { display: none; }
+      .timeline::before { left: 20px; }
+      .timeline-item { width: 100%; left: 0 !important; padding-left: 3rem !important; padding-right: 0 !important; text-align: left !important; }
+      .timeline-item .timeline-dot { left: 10px !important; right: auto !important; }
+      .cursor, .cursor-follower { display: none; }
+      body { cursor: auto; }
+    }
+
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader-content {
+      text-align: center;
+    }
+
+    .loader-ring {
+      width: 80px;
+      height: 80px;
+      border: 4px solid rgba(59, 130, 246, 0.1);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 2rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 
-<body data-spy="scroll" data-target="#main-nav" data-offset="80">
-  <div id="scroll-progress"></div>
-  <div class="mesh"></div>
-  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
+<body>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-ring"></div>
+      <h3>Loading Portfolio...</h3>
+    </div>
+  </div>
 
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg fixed-top" id="main-nav">
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
+  <!-- Animated Background -->
+  <div class="bg-animation"></div>
+  <div class="floating-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <div class="shape shape4"></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#home">Mohammed Suhaib Shabbir</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCollapse" aria-controls="navCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      <a class="navbar-brand" href="#home">Mohammed Suhaib</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="fas fa-bars text-white"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navCollapse">
-        <ul class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
           <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
@@ -200,243 +652,31 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <header id="home" class="container">
-    <div class="hero-wrap">
-      <!-- Text side -->
-      <div>
-        <div class="glass p-4 p-md-5 tilt">
-          <h1 class="hero-title">Hello, I'm <span style="color:#ffd369;">Mohammed Suhaib Shabbir</span></h1>
-          <p class="hero-sub">Business & Data Analyst • SQL • Python • Power BI • Tableau</p>
-          <div id="typing" aria-live="polite"></div>
-          <div class="mt-2">
-            <span class="magnetic">
-              <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary btn-pill btn-shadow" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin mr-1"></i> LinkedIn</a>
-            </span>
-            <span class="magnetic ml-2">
-              <a href="https://github.com/suhaxbb" class="btn btn-light btn-pill btn-shadow" target="_blank" rel="noopener noreferrer"><i class="fab fa-github mr-1"></i> GitHub</a>
-            </span>
-          </div>
-        </div>
-      </div>
-      <!-- Animation side -->
-      <div class="text-center" id="hero-anim">
-        <lottie-player
-          src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
-          background="transparent" speed="1" style="width:100%; max-width:520px; height:auto;" loop autoplay>
-        </lottie-player>
-      </div>
-    </div>
-  </header>
-
-  <!-- ABOUT -->
-  <section id="about">
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-animation"></div>
     <div class="container">
-      <div class="section-head">
-        <h2>About Me</h2>
-        <p>I turn data into decisions. I blend finance, analytics, and operations to build KPIs, streamline workflows, and deliver dashboards that drive impact.</p>
-      </div>
       <div class="row align-items-center">
-        <div class="col-md-5 mb-4 mb-md-0">
-          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" class="avatar tilt" loading="lazy" decoding="async" width="640" height="640">
-        </div>
-        <div class="col-md-7">
-          <div class="card-neo p-4">
-            <p class="mb-3">Comfortable partnering with finance, ops, and technical teams to turn ambiguous requirements into reliable data products. If there's a pattern, I’ll find it. If there’s a dashboard, I’ll build it.</p>
-            <div class="mb-1">
-              <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Power BI</span>
-              <span class="chip">Tableau</span><span class="chip">R</span><span class="chip">IBM Cognos</span><span class="chip">Excel (Advanced)</span>
+        <div class="col-lg-8">
+          <div class="hero-content">
+            <h1 class="hero-title mb-4">Hello, I'm <br><span style="color: var(--accent);">Mohammed Suhaib Shabbir</span></h1>
+            <p class="fs-5 mb-4 text-muted">Business & Data Analyst specializing in transforming complex data into actionable insights</p>
+            <div class="typing-text mb-5" id="typingText"></div>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="#about" class="btn-glow">
+                <i class="fas fa-user me-2"></i>Discover My Journey
+              </a>
+              <a href="#contact" class="btn-outline">
+                <i class="fas fa-envelope me-2"></i>Get In Touch
+              </a>
             </div>
-            <hr style="border-color:var(--line)">
-            <ul class="mb-0">
-              <li><strong>Email:</strong> <a href="mailto:suhaib2307@yahoo.com">suhaib2307@yahoo.com</a></li>
-              <li><strong>Phone:</strong> <a href="tel:+12896005895">+1 289-600-5895</a></li>
-              <li><strong>Location:</strong> Toronto, Ontario, Canada</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-head">
-        <h2>Skills</h2>
-        <p>Core technical tools, analytics strengths, and professional capabilities.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card-neo p-4 h-100 tilt">
-            <h5 class="mb-3">Languages & Tools</h5>
-            <div class="d-flex flex-wrap">
-              <span class="chip">SQL</span><span class="chip">Python</span><span class="chip">R</span>
-              <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">IBM Cognos</span>
-              <span class="chip">Excel</span><span class="chip">PowerPoint</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card-neo p-4 h-100 tilt">
-            <h5 class="mb-3">Data & Analytics</h5>
-            <ul class="mb-0">
-              <li>Dashboarding & KPI Design</li>
-              <li>Data Cleaning & Validation</li>
-              <li>Workflow Automation</li>
-              <li>Requirements & User Stories</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card-neo p-4 h-100 tilt">
-            <h5 class="mb-3">Soft Skills</h5>
-            <ul class="mb-0">
-              <li>Stakeholder Collaboration</li>
-              <li>Process Improvement</li>
-              <li>Analytical Thinking</li>
-              <li>Ethical Decision-Making</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-head">
-        <h2>Experience</h2>
-        <p>Professional journey — internships and roles.</p>
-      </div>
-
-      <div class="resume-grid">
-        <!-- Column A -->
-        <div class="timeline">
-          <div class="resume-item mb-4 reveal">
-            <span class="t-dot"></span>
-            <h4>Operations Analyst Intern</h4>
-            <div class="resume-meta">Fernhill Tax & Advisory (Associates Inc.) · Toronto / Pickering, ON · <span class="text-muted">May 2025 – Aug 2025</span></div>
-            <ul>
-              <li>Managed daily financial ops and reconciled 30–50 transactions weekly in QuickBooks.</li>
-              <li>Analyzed datasets to resolve discrepancies and improve KPI tracking (~15% reporting accuracy gain).</li>
-              <li>Built Excel dashboards & compliance-ready reports (advanced formulas & Pivot Tables).</li>
-            </ul>
-          </div>
-
-          <div class="resume-item mb-4 reveal">
-            <span class="t-dot"></span>
-            <h4>Sales Advisor</h4>
-            <div class="resume-meta">Sport Chek · Toronto, ON · <span class="text-muted">Nov 2024 – Apr 2025</span></div>
-            <ul>
-              <li>Monitored POS transactions, reducing payment errors by ~10% and ensuring policy compliance.</li>
-              <li>Promoted Triangle MasterCard; averaged 5+ sign-ups per month.</li>
-              <li>Optimized inventory displays to lift sales of high-demand items by ~10%.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Column B -->
-        <div class="timeline">
-          <div class="resume-item mb-4 reveal">
-            <span class="t-dot"></span>
-            <h4>Business Analyst Intern</h4>
-            <div class="resume-meta">Infrability IT Solutions · Hyderabad, India · <span class="text-muted">Sept 2022 – May 2023</span></div>
-            <ul>
-              <li>Supported Dynamics 365 CRM/ERP rollout: documented 30+ user stories and assisted Agile sprints.</li>
-              <li>Mapped workflows and identified >5 process gaps; enabled measurable efficiency gains.</li>
-              <li>Assisted data migration (5,000+ records) and built automations to cut manual entry ~25%.</li>
-            </ul>
-          </div>
-
-          <div class="resume-item reveal">
-            <span class="t-dot"></span>
-            <h4>Financial Analyst Intern</h4>
-            <div class="resume-meta">Saudi Ericsson · Riyadh, Saudi Arabia · <span class="text-muted">Jun 2021 – Aug 2021</span></div>
-            <ul>
-              <li>Consolidated & coded 50+ petty cash transactions; centralized records for monthly reporting.</li>
-              <li>Resolved 10+ account discrepancies; coordinated 40+ expense claims for timely submissions.</li>
-              <li>Improved visibility of monthly expenses and strengthened internal controls.</li>
-            </ul>
-          </div>
-
-          <div class="resume-item mt-4 reveal">
-            <span class="t-dot"></span>
-            <h4>Business Analyst Intern</h4>
-            <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">May 2020 – Aug 2020</span></div>
-            <ul>
-              <li>Researched barriers to adopting sustainable products; designed surveys and analyzed responses.</li>
-              <li>Presented insights and recommendations to improve awareness and adoption strategies.</li>
-            </ul>
-          </div>
-        </div>
-      </div><!-- /grid -->
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="container">
-      <div class="section-head">
-        <h2>Education</h2>
-        <p>Academic background and recognition.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <div class="card-neo p-4 h-100 tilt reveal">
-            <h4>Postgraduate Certificate — Business Insights & Analytics</h4>
-            <div class="resume-meta">Humber Polytechnic · Toronto, ON · <span class="text-muted">Sept 2023 – Apr 2025</span></div>
-            <p class="mb-2"><span class="badge badge-pill" style="background:#fde68a;color:#7c2d12;">Dean’s List</span></p>
-            <p class="mb-0" style="color:var(--muted)">Coursework: Data Modeling, BI, Advanced Excel, Data Visualization, Python/R for Analytics.</p>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="card-neo p-4 h-100 tilt reveal">
-            <h4>Bachelor of Business Administration (Finance)</h4>
-            <div class="resume-meta">ICFAI University · Hyderabad, India · <span class="text-muted">2019 – 2022</span></div>
-            <p class="mb-0" style="color:var(--muted)">Focus: Corporate Finance, Management, Operations, Research Methods.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <div class="section-head">
-        <h2>Projects</h2>
-        <p>Selected work that demonstrates real-world analytics and reporting.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
-            <img src="images/FD.jpg" alt="Fraud detection dashboard preview" loading="lazy" decoding="async" width="800" height="450">
-            <div class="card-body">
-              <h5 class="mb-2">Fraud Detection in Financial Transactions</h5>
-              <p class="mb-2" style="color:var(--muted)">Python, scikit-learn, Pandas — imbalanced-data pipeline, EDA, feature importance.</p>
-              <a href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
-            <img src="images/Retail.jpg" alt="Retail performance analysis dashboard preview" loading="lazy" decoding="async" width="800" height="450">
-            <div class="card-body">
-              <h5 class="mb-2">Retail Performance Analysis</h5>
-              <p class="mb-2" style="color:var(--muted)">SPSS + IBM Cognos — segmentation, top-product analysis, interactive dashboards.</p>
-              <a href="https://github.com/suhaxbb/Retail-Trends-Analysis-IBM-SPSS-and-IBM-Cognos-Analytics-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex mb-4">
-          <div class="card-neo project-card w-100 tilt reveal">
-            <img src="images/Bank.jpg" alt="Bank loan analytics dashboard preview" loading="lazy" decoding="async" width="800" height="450">
-            <div class="card-body">
-              <h5 class="mb-2">Bank Loan Performance Analytics</h5>
-              <p class="mb-2" style="color:var(--muted)">SQL + Power BI — loan trends, funded amounts, customer profiles.</p>
-              <a href="https://github.com/suhaxbb/Bank-Loan-Report-sql-Bi" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            <div class="mt-5">
+              <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" target="_blank" class="text-primary me-4 fs-4">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://github.com/suhaxbb" target="_blank" class="text-primary fs-4">
+                <i class="fab fa-github"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -444,149 +684,121 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
+  <!-- About Section -->
+  <section id="about" class="reveal">
     <div class="container">
-      <div class="section-head">
-        <h2>Contact</h2>
-        <p>Let’s build something impactful.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <div class="contact-tile h-100 tilt reveal">
-            <i class="fas fa-map-marker-alt"></i>
-            <h5 class="mt-2 mb-1">Address</h5>
-            <p class="mb-0">Toronto, Ontario, Canada</p>
+      <h2 class="section-title">About Me</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="glass-card text-center">
+            <div class="position-relative d-inline-block mb-4">
+              <img src="https://via.placeholder.com/300x300/3b82f6/ffffff?text=MS" alt="Mohammed Suhaib Shabbir" 
+                   class="rounded-circle img-fluid" style="width: 250px; height: 250px; object-fit: cover;">
+              <div class="position-absolute bottom-0 end-0 bg-success rounded-circle" 
+                   style="width: 50px; height: 50px; border: 4px solid var(--bg);"></div>
+            </div>
+            <h4 class="mb-3">Based in Toronto, Canada</h4>
+            <p class="text-muted">Passionate about data storytelling and business optimization</p>
           </div>
         </div>
-        <div class="col-md-4 mb-3">
-          <div class="contact-tile h-100 tilt reveal">
-            <i class="fas fa-envelope"></i>
-            <h5 class="mt-2 mb-1">Email</h5>
-            <p class="mb-0"><a href="mailto:suhaib2307@yahoo.com">suhaib2307@yahoo.com</a></p>
+        <div class="col-lg-6">
+          <div class="glass-card">
+            <h3 class="mb-4">Turning Data Into Decisions</h3>
+            <p class="mb-4">I'm a dedicated Business & Data Analyst with expertise in SQL, Python, Power BI, and Tableau. I specialize in transforming complex datasets into compelling narratives that drive strategic decision-making.</p>
+            <p class="mb-4">My approach combines technical proficiency with business acumen, ensuring that every analysis delivers actionable insights that create measurable impact.</p>
+            
+            <div class="row">
+              <div class="col-sm-6">
+                <h5 class="text-primary mb-3">Core Strengths</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Data Analysis</li>
+                  <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Business Intelligence</li>
+                  <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Dashboard Creation</li>
+                  <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i>Process Optimization</li>
+                </ul>
+              </div>
+              <div class="col-sm-6">
+                <h5 class="text-secondary mb-3">Contact Info</h5>
+                <p class="mb-1"><strong>Email:</strong></p>
+                <p class="text-muted mb-3">suhaib2307@yahoo.com</p>
+                <p class="mb-1"><strong>Phone:</strong></p>
+                <p class="text-muted">+1 289-600-5895</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 mb-3">
-          <div class="contact-tile h-100 tilt reveal">
-            <i class="fas fa-phone-alt"></i>
-            <h5 class="mt-2 mb-1">Phone</h5>
-            <p class="mb-0"><a href="tel:+12896005895">+1 289-600-5895</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-4">
-        <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" target="_blank" rel="noopener noreferrer" class="mr-3"><i class="fab fa-linkedin fa-2x"></i></a>
-        <a href="https://github.com/suhaxbb" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-2x"></i></a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="py-3">
-    <div class="container text-center">
-      <p>&copy; <script>document.write(new Date().getFullYear());</script> Mohammed Suhaib Shabbir · All Rights Reserved.</p>
+  <!-- Skills Section -->
+  <section id="skills" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Skills & Expertise</h2>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="glass-card h-100">
+            <div class="text-center mb-4">
+              <i class="fas fa-code fs-1 text-primary mb-3"></i>
+              <h4>Technical Skills</h4>
+            </div>
+            <div class="d-flex flex-wrap justify-content-center">
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">R</span>
+              <span class="skill-tag">Power BI</span>
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">IBM Cognos</span>
+              <span class="skill-tag">Excel</span>
+              <span class="skill-tag">SPSS</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="glass-card h-100">
+            <div class="text-center mb-4">
+              <i class="fas fa-chart-line fs-1 text-secondary mb-3"></i>
+              <h4>Analytics</h4>
+            </div>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Data Visualization</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Statistical Analysis</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>KPI Development</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Predictive Modeling</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Data Mining</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="glass-card h-100">
+            <div class="text-center mb-4">
+              <i class="fas fa-users fs-1 text-success mb-3"></i>
+              <h4>Soft Skills</h4>
+            </div>
+            <ul class="list-unstyled">
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Strategic Thinking</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Stakeholder Management</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Problem Solving</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Communication</li>
+              <li class="mb-3"><i class="fas fa-arrow-right text-accent me-2"></i>Project Management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Back to Top -->
-  <button id="backToTop" class="btn btn-primary btn-pill btn-shadow"><i class="fas fa-chevron-up"></i></button>
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <script>
-    // Respect reduced motion
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Typing animation
-    const typingEl = document.getElementById("typing");
-    const typingTexts = ["Business Analytics Postgrad","Data Storyteller","Operations & Finance Savvy","Analytical Strategist"];
-    let tIdx=0, cIdx=0, del=false;
-    function type(){
-      if(!typingEl) return;
-      if(prefersReduced){ typingEl.textContent = typingTexts.join(" • "); return; }
-      const t = typingTexts[tIdx];
-      typingEl.textContent = del ? t.slice(0, --cIdx) : t.slice(0, ++cIdx);
-      if(!del && cIdx === t.length){ del = true; return setTimeout(type, 900); }
-      if(del && cIdx === 0){ del = false; tIdx = (tIdx+1)%typingTexts.length; return setTimeout(type, 280); }
-      setTimeout(type, 80);
-    }
-    document.addEventListener("DOMContentLoaded", type);
-
-    // Scroll progress bar
-    const progress = document.getElementById('scroll-progress');
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement;
-      const scrolled = (h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100;
-      progress.style.width = scrolled + '%';
-    });
-
-    // Back to top
-    const btt = document.getElementById('backToTop');
-    window.addEventListener('scroll', ()=> {
-      if (window.scrollY > 400) btt.classList.add('show');
-      else btt.classList.remove('show');
-    });
-    btt.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-
-    if (!prefersReduced && window.gsap && window.ScrollTrigger){
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Parallax hero Lottie
-      const heroAnim = document.getElementById('hero-anim');
-      window.addEventListener('mousemove', (e)=>{
-        const x = (e.clientX / window.innerWidth - .5) * 10;
-        const y = (e.clientY / window.innerHeight - .5) * 10;
-        heroAnim.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      });
-
-      // Reveal on scroll (no hidden class = safe fallback)
-      gsap.utils.toArray('.reveal').forEach((el, i)=>{
-        gsap.from(el, {
-          scrollTrigger: { trigger: el, start: "top 85%" },
-          y: 24, autoAlpha: 0, duration: .7, ease: "power2.out", delay: (i%5)*0.05
-        });
-      });
-
-      // Subtle hero entrance
-      gsap.from(".hero-title", {y: 20, autoAlpha: 0, duration: .9, ease:"power3.out"});
-      gsap.from(".hero-sub",   {y: 20, autoAlpha: 0, duration: .9, ease:"power3.out", delay:.1});
-      gsap.from("#typing",     {y: 14, autoAlpha: 0, duration: .9, ease:"power3.out", delay:.2});
-
-      // Magnetic buttons
-      document.querySelectorAll('.magnetic').forEach(w => {
-        const btn = w.querySelector('a');
-        w.addEventListener('mousemove', (e)=>{
-          const rect = w.getBoundingClientRect();
-          const dx = (e.clientX - rect.left - rect.width/2)/8;
-          const dy = (e.clientY - rect.top  - rect.height/2)/8;
-          btn.style.transform = `translate(${dx}px, ${dy}px)`;
-        });
-        w.addEventListener('mouseleave', ()=> btn.style.transform = `translate(0,0)`);
-      });
-
-      // Tilt cards
-      const maxTilt = 10;
-      document.querySelectorAll('.tilt').forEach(card=>{
-        card.addEventListener('mousemove', (e)=>{
-          const r = card.getBoundingClientRect();
-          const px = (e.clientX - r.left) / r.width;
-          const py = (e.clientY - r.top)  / r.height;
-          const rx = (py - .5) * -maxTilt;
-          const ry = (px - .5) *  maxTilt;
-          card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
-        });
-        card.addEventListener('mouseleave', ()=>{
-          card.style.transform = 'rotateX(0) rotateY(0)';
-        });
-      });
-    }
-  </script>
-</body>
-</html>
+  <!-- Experience Section -->
+  <section id="experience" class="reveal">
+    <div class="container">
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="glass-card">
+            <h4 class="text-primary">Operations Analyst Intern</h4>
+            <h5 class="text-muted mb-2">Fernhill Tax & Advisory</h5>
+            <p class="text-accent mb-3">May 2025 – Aug 2025 | Toronto, ON</p>
+            <ul class="list-unstyled">
+              <li class="mb-2">• Managed 30-50 weekly transactions in QuickBooks</li>
+              <li class="mb
