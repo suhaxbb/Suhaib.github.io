@@ -4,255 +4,118 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio | Mohammed Suhaib Shabbir</title>
-  
-  <!-- Bootstrap 4 CDN -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-  <!-- Google Font: Montserrat -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
-  <!-- Font Awesome for Icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
 
-  <!-- Custom Styles -->
+  <!-- Meta / SEO -->
+  <meta name="description" content="Business & Data Analyst in Toronto — SQL, Python, Power BI, Tableau. Turning data into decisions."/>
+  <link rel="canonical" href="https://suhaxbb.github.io/Suhaib.github.io/"/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portfolio | Mohammed Suhaib Shabbir">
+  <meta property="og:description" content="Business & Data Analyst in Toronto — SQL, Python, Power BI, Tableau.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://suhaxbb.github.io/Suhaib.github.io/">
+  <meta property="og:image" content="images/profilePic.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio | Mohammed Suhaib Shabbir">
+  <meta name="twitter:description" content="Business & Data Analyst in Toronto — SQL, Python, Power BI, Tableau.">
+  <meta name="twitter:image" content="images/profilePic.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mohammed Suhaib Shabbir",
+    "jobTitle": "Business & Data Analyst",
+    "address": {"@type":"PostalAddress","addressLocality":"Toronto","addressRegion":"ON","addressCountry":"CA"},
+    "email": "mailto:suhaib2307@yahoo.com",
+    "telephone": "+12896005895",
+    "sameAs": [
+      "https://www.linkedin.com/in/mohammed-suhaib-shabbir",
+      "https://github.com/suhaxbb"
+    ],
+    "url": "https://suhaxbb.github.io/Suhaib.github.io/"
+  }
+  </script>
+
+  <!-- Styles -->
   <style>
-    /* Base Styles */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: #fff;
-      color: #333;
-      scroll-behavior: smooth;
-    }
-    a {
-      text-decoration: none;
-      color: #ff6f61;
-      transition: color 0.3s;
-    }
-    a:hover {
-      color: #ff4b3e;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    section {
-      padding: 80px 0;
-    }
-    .section-heading {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    .section-heading h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      position: relative;
-    }
-    .section-heading p {
-      font-size: 1rem;
-      color: #666;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    body { font-family: 'Montserrat', sans-serif; background:#fff; color:#333; scroll-behavior:smooth; }
+    a { text-decoration:none; color:#ff6f61; transition:color .3s; }
+    a:hover { color:#ff4b3e; }
+    ul { list-style:none; padding:0; margin:0; }
+    section { padding:80px 0; }
+    .section-heading { text-align:center; margin-bottom:50px; }
+    .section-heading h2 { font-size:2.5rem; font-weight:600; margin-bottom:10px; }
+    .section-heading p { color:#666; max-width:720px; margin:0 auto; }
 
-    /* Navbar */
-    .navbar {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      background: #fff;
-    }
-    .navbar-brand {
-      font-weight: 700;
-    }
-    .nav-link {
-      font-weight: 500;
-      margin-right: 1rem;
-    }
-    .nav-link:hover {
-      color: #ff6f61 !important;
-    }
+    .navbar { box-shadow:0 2px 4px rgba(0,0,0,.08); background:#fff; }
+    .navbar-brand { font-weight:700; }
+    .nav-link { font-weight:500; margin-right:1rem; }
+    .nav-link:hover { color:#ff6f61 !important; }
 
-    /* Hero Section */
     #home {
-      min-height: 100vh;
-      color: #fff;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url("images/IMG_4798.jpg") center center/cover no-repeat;
+      min-height:100vh; color:#fff; position:relative; display:flex; align-items:center; justify-content:center; text-align:center;
+      background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("images/IMG_4798.jpg") center/cover no-repeat;
     }
-    #home .hero-content {
-      max-width: 700px;
-    }
-    #home h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    #home h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin-bottom: 30px;
-    }
-    #typing-animation {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #ffd369;
-      min-height: 30px;
-      margin-bottom: 30px;
-    }
-    #home p a.btn {
-      padding: 10px 30px;
-      border-radius: 30px;
-    }
+    #home .hero-content { max-width:800px; }
+    #home h1 { font-size:3rem; font-weight:700; margin-bottom:20px; }
+    #home h2 { font-size:1.5rem; font-weight:400; margin-bottom:20px; }
+    #typing-animation { font-size:1.1rem; font-weight:500; color:#ffd369; min-height:30px; margin-bottom:28px; }
+    #home .btn { padding:10px 26px; border-radius:30px; box-shadow:0 2px 6px rgba(0,0,0,.25); }
 
-    /* About Section */
-    #about img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    #about p {
-      font-size: 1rem;
-      line-height: 1.8;
-    }
-    #about ul li {
-      margin-bottom: 10px;
-      font-size: 1rem;
-    }
+    #about img { width:100%; border-radius:8px; margin-bottom:20px; }
+    #about p { line-height:1.8; }
 
-    /* Skills Section */
-    #skills h4 {
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    #skills ul li {
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-    /* Add subtle divider line between skill groups */
-    .skill-group {
-      padding-bottom: 20px;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 20px;
-    }
+    #skills h4 { font-weight:600; margin-bottom:12px; color:#333; }
+    #skills .skill-group { padding-bottom:20px; border-bottom:1px solid #eee; margin-bottom:20px; }
 
-    /* Resume Section */
-    .resume-item {
-      background: #f9f9f9;
-      padding: 25px;
-      border-radius: 8px;
-      margin-bottom: 25px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .resume-item h4 {
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .resume-item span {
-      color: #888;
-      font-size: 0.9rem;
-    }
-    .resume-item ul li {
-      font-size: 0.95rem;
-      margin-bottom: 5px;
-    }
+    .resume-item { background:#f9f9f9; padding:24px; border-radius:8px; margin-bottom:22px; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+    .resume-item h4 { font-weight:600; margin-bottom:6px; }
+    .resume-item span { color:#888; font-size:.95rem; display:block; margin-bottom:4px; }
 
-    /* Projects Section */
-    .project-card {
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-    }
-    .project-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .project-card .card-body {
-      padding: 20px;
-    }
-    .project-card h5 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .project-card p {
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-    }
+    .project-card { background:#fff; border-radius:8px; margin-bottom:30px; box-shadow:0 2px 8px rgba(0,0,0,.1); overflow:hidden; transition:transform .3s ease; height:100%; }
+    .project-card:hover { transform:translateY(-5px); }
+    .project-card img { width:100%; height:220px; object-fit:cover; }
+    .project-card .card-body { padding:20px; display:flex; flex-direction:column; height:calc(100% - 220px); }
+    .project-card h5 { font-size:1.1rem; font-weight:600; margin-bottom:10px; }
+    .project-card p { flex:1; }
 
-    /* Contact Section */
-    .contact-info {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .contact-info i {
-      font-size: 2.5rem;
-      color: #ff6f61;
-      margin-bottom: 10px;
-    }
-    .contact-info h5 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    .contact-info p {
-      font-size: 0.95rem;
-    }
+    .contact-info { text-align:center; margin-bottom:30px; }
+    .contact-info i { font-size:2.2rem; color:#ff6f61; margin-bottom:10px; }
+    footer { background:#333; color:#bbb; padding:20px 0; text-align:center; }
+    footer p { margin:0; font-size:.9rem; }
 
-    /* Footer */
-    footer {
-      background: #333;
-      color: #bbb;
-      padding: 20px 0;
-      text-align: center;
-    }
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
+    #back-to-top { position:fixed; bottom:30px; right:30px; background:#ff6f61; color:#fff; padding:10px 15px; border-radius:50%; font-size:1.2rem; cursor:pointer; display:none; transition:background .3s; z-index:999; }
+    #back-to-top:hover { background:#ff4b3e; }
 
-    /* BACK TO TOP BUTTON */
-    #back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #ff6f61;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: none; /* Hidden by default */
-      transition: background 0.3s;
-      z-index: 999;
-    }
-    #back-to-top:hover {
-      background: #ff4b3e;
+    @media (max-width:576px){
+      #home h1{font-size:2.2rem;}
+      #home h2{font-size:1.1rem;}
+      .project-card img{height:180px;}
     }
   </style>
 </head>
-<body>
+<body data-spy="scroll" data-target="#main-nav" data-offset="80">
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="#home">Mohammed Suhaib Shabbir</a>
+      <a class="navbar-brand" href="#home" aria-label="Home">Mohammed Suhaib Shabbir</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -261,44 +124,45 @@
           <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resume">Experience</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#leadership">Leadership</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
+  <!-- HERO -->
   <section id="home">
     <div class="container hero-content">
       <h1>Hello, I'm <span style="color:#ffd369;">Mohammed Suhaib Shabbir</span></h1>
       <h2>Transforming Data into Business Impact</h2>
       <div id="typing-animation"></div>
-      <p>
-        <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary" target="_blank">LinkedIn</a>
-        <a href="https://github.com/suhaxbb" class="btn btn-outline-light ml-2" target="_blank">GitHub</a>
+      <p class="mt-2">
+        <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" class="btn btn-primary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/suhaxbb" class="btn btn-light ml-2" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="YOUR_RESUME_URL.pdf" class="btn btn-warning ml-2" download>Download Resume (PDF)</a>
       </p>
     </div>
   </section>
 
-  <!-- ABOUT SECTION -->
+  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <div class="section-heading">
         <h2>About Me</h2>
-        <p>I believe data tells a story—and I help businesses decode it.</p>
+        <p>I believe data tells a story — and I help businesses decode it. I blend finance, analytics, and operations to build KPIs, streamline workflows, and deliver dashboards that drive decisions.</p>
       </div>
       <div class="row">
         <div class="col-md-5 mb-4 mb-md-0">
-          <img src="images/profilePic.png" alt="Profile Picture" />
+          <img src="images/profilePic.png" alt="Headshot of Mohammed Suhaib Shabbir" loading="lazy" decoding="async" width="640" height="640"/>
         </div>
         <div class="col-md-7">
-          <p>
-            I turn data into decisions, numbers into narratives, and coffee into code. As a business and data analyst, I blend finance, analytics, and problem-solving to uncover insights that drive impact. Whether it's SQL, Python, or Power BI, I love making data work smarter—because good decisions start with great analysis. If there's a pattern, I’ll find it. If there’s a dashboard, I’ll build it. Let’s make data make sense!
-          </p>
+          <p>Skilled across SQL, Python, Power BI, Tableau, R, and IBM Cognos. Comfortable partnering with finance, ops, and technical teams to turn requirements into reliable data products.</p>
           <ul>
-            <li><strong>Email:</strong> suhaib2307@yahoo.com</li>
+            <li><strong>Email:</strong> <a href="mailto:suhaib2307@yahoo.com">suhaib2307@yahoo.com</a></li>
+            <li><strong>Phone:</strong> <a href="tel:+12896005895">+1 289-600-5895</a></li>
             <li><strong>Location:</strong> Toronto, Ontario, Canada</li>
           </ul>
         </div>
@@ -306,154 +170,166 @@
     </div>
   </section>
 
-  <!-- SKILLS SECTION -->
+  <!-- SKILLS -->
   <section id="skills">
     <div class="container">
       <div class="section-heading">
         <h2>Skills</h2>
-        <p>My technical and professional expertise.</p>
+        <p>Technical and professional strengths.</p>
       </div>
       <div class="row text-center">
-        <!-- Languages & Tools -->
         <div class="col-md-4 skill-group">
           <h4>Languages & Tools</h4>
           <ul>
-            <li>R</li>
-            <li>SQL</li>
-            <li>Python</li>
-            <li>Power BI</li>
-            <li>Tableau</li>
-            <li>IBM Cognos Analytics</li>
-            <li>MS Office Suite (Excel, PowerPoint)</li>
+            <li>SQL, Python, R</li>
+            <li>Power BI, Tableau, IBM Cognos</li>
+            <li>Excel (Advanced), PowerPoint, Visio</li>
+            <li>QuickBooks (Ops/Finance exposure)</li>
           </ul>
         </div>
-        <!-- Soft Skills -->
         <div class="col-md-4 skill-group">
+          <h4>Data & Analytics</h4>
+          <ul>
+            <li>Dashboarding & KPI Design</li>
+            <li>Data Cleaning & Validation</li>
+            <li>Workflow Automation</li>
+            <li>Requirements & User Stories</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
           <h4>Soft Skills</h4>
           <ul>
-            <li>Storytelling</li>
             <li>Stakeholder Collaboration</li>
-            <li>Cross-functional Communication</li>
-            <li>Data Transformation</li>
-          </ul>
-        </div>
-        <!-- Specialized Skills -->
-        <div class="col-md-4">
-          <h4>Specialized Skills</h4>
-          <ul>
-            <li>Digital Transformation</li>
-            <li>Process Optimization</li>
-            <li>AI-Driven Solutions</li>
-            <li>KPI Reporting</li>
+            <li>Process Improvement</li>
+            <li>Analytical Thinking</li>
+            <li>Ethical Decision-Making</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RESUME SECTION -->
+  <!-- EXPERIENCE -->
   <section id="resume">
     <div class="container">
       <div class="section-heading">
-        <h2>Resume</h2>
-        <p>My professional journey and academic background.</p>
+        <h2>Experience</h2>
+        <p>Professional journey — internships and roles.</p>
       </div>
       <div class="row">
-        <!-- Experience -->
         <div class="col-md-6">
-          <h4 class="mb-4">Experience</h4>
+          <!-- Fernhill -->
           <div class="resume-item">
-            <span>Nov 2024 - Present</span>
+            <span>May 2025 – Aug 2025</span>
+            <h4>Operations Analyst Intern</h4>
+            <p><strong>Fernhill Tax & Advisory (Associates Inc.) — Toronto / Pickering, ON</strong></p>
+            <ul>
+              <li>Managed daily financial ops and reconciled 30–50 transactions weekly in QuickBooks with internal controls.</li>
+              <li>Analyzed datasets to resolve discrepancies and improve KPI tracking; boosted reporting accuracy by ~15%.</li>
+              <li>Built Excel-based dashboards & compliance-ready reports using advanced formulas and Pivot Tables.</li>
+            </ul>
+          </div>
+          <!-- Sport Chek -->
+          <div class="resume-item">
+            <span>Nov 2024 – Apr 2025</span>
             <h4>Sales Advisor</h4>
-            <p><strong>Sport Chek, Toronto, Ontario</strong></p>
+            <p><strong>Sport Chek — Toronto, ON</strong></p>
             <ul>
-              <li>Enhanced customer experience by optimizing product displays, ensuring seamless transactions, and promoting the Triangle MasterCard, driving sales and engagement.
-			  </li>
+              <li>Monitored POS transactions for accuracy, reducing payment errors by ~10% and ensuring policy compliance.</li>
+              <li>Promoted financial products; averaged 5+ Triangle MasterCard sign-ups per month.</li>
+              <li>Optimized inventory displays to lift sales of high-demand items by ~10%.</li>
             </ul>
           </div>
+          <!-- Infrability -->
           <div class="resume-item">
-            <span>Jun 2021 - Aug 2021</span>
-            <h4>Financial Analyst Intern</h4>
-            <p><strong>Saudi Ericsson, Riyadh, Saudi Arabia</strong></p>
-            <ul>
-              <li>Optimized financial processes by conducting risk assessments, reconciling 150+ client accounts, and improving compliance workflows—enhancing governance, accuracy, and decision-making efficiency.</li>
-            </ul>
-          </div>
-          <div class="resume-item">
-            <span>Jun 2020 - Aug 2020</span>
+            <span>Sept 2022 – May 2023</span>
             <h4>Business Analyst Intern</h4>
-            <p><strong>ICFAI University, Hyderabad, India</strong></p>
+            <p><strong>Infrability IT Solutions — Hyderabad, India</strong></p>
             <ul>
-              <li>Analyzed multi-source data using Excel to uncover trends and barriers in sustainable product adoption, delivering actionable insights through reports and presentations.
-
-
-
-
-
-
-
-			  </li>
+              <li>Supported Dynamics 365 CRM/ERP rollout: documented 30+ user stories and assisted Agile sprints.</li>
+              <li>Mapped workflows and identified 5+ process gaps, enabling measurable efficiency gains.</li>
+              <li>Assisted migration of 5,000+ records; designed automations to cut manual entry by ~25%.</li>
             </ul>
           </div>
         </div>
-        <!-- Education -->
+
         <div class="col-md-6">
-          <h4 class="mb-4">Education</h4>
+          <!-- Saudi Ericsson -->
           <div class="resume-item">
-            <span>Sept 2023 - Sept 2025</span>
-            <h4>Postgraduate Certificate in Business Insights and Analytics</h4>
-            <p><strong>Humber Polytechnic, Toronto, Ontario</strong></p>
-            <p>Dean’s List</p>
+            <span>Jun 2021 – Aug 2021</span>
+            <h4>Financial Analyst Intern</h4>
+            <p><strong>Saudi Ericsson — Riyadh, Saudi Arabia</strong></p>
+            <ul>
+              <li>Consolidated & coded 50+ petty cash transactions; maintained centralized records for monthly reporting.</li>
+              <li>Resolved 10+ account discrepancies; coordinated 40+ expense claims to ensure timely, accurate submissions.</li>
+              <li>Improved visibility of monthly expenses and strengthened internal controls and compliance.</li>
+            </ul>
+          </div>
+          <!-- ICFAI University -->
+          <div class="resume-item">
+            <span>May 2020 – Aug 2020</span>
+            <h4>Business Analyst Intern</h4>
+            <p><strong>ICFAI University — Hyderabad, India</strong></p>
+            <ul>
+              <li>Researched barriers to adopting sustainable products; designed surveys and analyzed responses.</li>
+              <li>Presented insights and recommendations to improve awareness and adoption strategies.</li>
+            </ul>
+          </div>
+
+          <!-- Education -->
+          <div class="resume-item">
+            <span>Sept 2023 – Apr 2025</span>
+            <h4>Postgraduate: Business Insights & Analytics (Dean’s List)</h4>
+            <p><strong>Humber Polytechnic — Toronto, ON</strong></p>
           </div>
           <div class="resume-item">
-            <span>Jun 2019 - Jun 2022</span>
-            <h4>Bachelor of Business Administration</h4>
-            <p><strong>ICFAI University, Hyderabad, India</strong></p>
-            <p>Majors in Finance & Management</p>
+            <span>2019 – 2022</span>
+            <h4>BBA (Major in Finance)</h4>
+            <p><strong>ICFAI University — Hyderabad, India</strong></p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
       <div class="section-heading">
         <h2>Projects</h2>
-        <p>Some of my Data-driven projects showcasing my skills.</p>
+        <p>Hands-on work demonstrating analytics skills.</p>
       </div>
       <div class="row">
         <!-- Project 1 -->
-        <div class="col-md-4">
-          <div class="project-card">
-            <img src="images/FD.jpg" alt="Fraud Detection" />
+        <div class="col-md-4 d-flex">
+          <div class="project-card w-100">
+            <img src="images/FD.jpg" alt="Fraud detection model dashboard preview" loading="lazy" decoding="async" width="800" height="450"/>
             <div class="card-body">
               <h5>Fraud Detection in Financial Transactions</h5>
-              <p>Developed a machine learning pipeline to detect fraudulent transactions.</p>
-              <a href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION" target="_blank">View on GitHub</a>
+              <p>Python, scikit-learn, Pandas — built an end-to-end ML pipeline for imbalanced data; EDA + feature importance.</p>
+              <a href="https://github.com/suhaxbb/FRAUD-DETECTION-IN-FINANCIAL-TRANSACTION" target="_blank" rel="noopener noreferrer">View on GitHub</a>
             </div>
           </div>
         </div>
         <!-- Project 2 -->
-        <div class="col-md-4">
-          <div class="project-card">
-            <img src="images/Retail.jpg" alt="Retail Analysis" />
+        <div class="col-md-4 d-flex">
+          <div class="project-card w-100">
+            <img src="images/Retail.jpg" alt="Retail performance analysis dashboard preview" loading="lazy" decoding="async" width="800" height="450"/>
             <div class="card-body">
               <h5>Retail Performance Analysis</h5>
-              <p>Analyzed customer and sales data using SPSS and IBM Cognos Analytics.</p>
-              <a href="https://github.com/suhaxbb/Retail-Trends-Analysis-IBM-SPSS-and-IBM-Cognos-Analytics-" target="_blank">View on GitHub</a>
+              <p>SPSS + IBM Cognos — segmentation, top-product analysis, and interactive dashboards for regional trends.</p>
+              <a href="https://github.com/suhaxbb/Retail-Trends-Analysis-IBM-SPSS-and-IBM-Cognos-Analytics-" target="_blank" rel="noopener noreferrer">View on GitHub</a>
             </div>
           </div>
         </div>
         <!-- Project 3 -->
-        <div class="col-md-4">
-          <div class="project-card">
-            <img src="images/Bank.jpg" alt="Bank Loan Analytics" />
+        <div class="col-md-4 d-flex">
+          <div class="project-card w-100">
+            <img src="images/Bank.jpg" alt="Bank loan analytics dashboard preview" loading="lazy" decoding="async" width="800" height="450"/>
             <div class="card-body">
               <h5>Bank Loan Performance Analytics</h5>
-              <p>Created SQL queries and Power BI dashboards to analyze loan trends.</p>
-              <a href="https://github.com/suhaxbb/Bank-Loan-Report-sql-Bi" target="_blank">View on GitHub</a>
+              <p>SQL + Power BI — loan trends, funded amounts, customer profiles; dashboards for compliance & decisions.</p>
+              <a href="https://github.com/suhaxbb/Bank-Loan-Report-sql-Bi" target="_blank" rel="noopener noreferrer">View on GitHub</a>
             </div>
           </div>
         </div>
@@ -461,15 +337,38 @@
     </div>
   </section>
 
-  <!-- CONTACT SECTION -->
+  <!-- LEADERSHIP -->
+  <section id="leadership">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Leadership</h2>
+        <p>Driving engagement and outcomes beyond the classroom.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="resume-item">
+            <span>Mar 2021 – Apr 2022</span>
+            <h4>Event & Marketing Lead</h4>
+            <p><strong>Arena Sports Club — ICFAI University, Hyderabad</strong></p>
+            <ul>
+              <li>Organized 10+ campus events; used Google Forms to streamline sign-ups and feedback (attendance +30%).</li>
+              <li>Onboarded 50+ team members with efficient workflows; boosted collaboration and participation.</li>
+              <li>Ran targeted campaigns and tracked KPIs to grow online engagement by ~40%.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="section-heading">
-        <h2>Contact Me</h2>
-        <p>Let's get in touch! I’d love to hear from you.</p>
+        <h2>Contact</h2>
+        <p>Let’s build something impactful.</p>
       </div>
       <div class="row justify-content-center">
-        <!-- Address -->
         <div class="col-md-3">
           <div class="contact-info">
             <i class="fas fa-map-marker-alt"></i>
@@ -477,7 +376,6 @@
             <p>Toronto, Ontario, Canada</p>
           </div>
         </div>
-        <!-- Phone -->
         <div class="col-md-3">
           <div class="contact-info">
             <i class="fas fa-phone-alt"></i>
@@ -485,7 +383,6 @@
             <p><a href="tel:+12896005895">+1 289-600-5895</a></p>
           </div>
         </div>
-        <!-- Email -->
         <div class="col-md-3">
           <div class="contact-info">
             <i class="fas fa-envelope"></i>
@@ -493,23 +390,21 @@
             <p><a href="mailto:suhaib2307@yahoo.com">suhaib2307@yahoo.com</a></p>
           </div>
         </div>
-        <!-- Resume -->
         <div class="col-md-3">
           <div class="contact-info">
             <i class="fas fa-file-alt"></i>
             <h5>Resume</h5>
-            <p><a href="https://github.com/suhaxbb/MyResume/blob/main/Suhaib-Resume..pdf">Download CV</a></p>
+            <p><a href="YOUR_RESUME_URL.pdf" target="_blank" rel="noopener noreferrer">Download CV</a></p>
           </div>
         </div>
       </div>
-      <!-- Social Links -->
       <div class="row mt-5">
         <div class="col text-center">
           <p>Find me on</p>
-          <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" target="_blank">
+          <a href="https://www.linkedin.com/in/mohammed-suhaib-shabbir" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-linkedin fa-2x mr-3"></i>
           </a>
-          <a href="https://github.com/suhaxbb" target="_blank">
+          <a href="https://github.com/suhaxbb" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-github fa-2x"></i>
           </a>
         </div>
@@ -524,63 +419,35 @@
     </div>
   </footer>
 
-  <!-- BACK TO TOP BUTTON -->
-  <div id="back-to-top"><i class="fas fa-chevron-up"></i></div>
+  <!-- BACK TO TOP -->
+  <div id="back-to-top" aria-label="Back to top" title="Back to top"><i class="fas fa-chevron-up"></i></div>
 
-  <!-- JavaScript: jQuery & Bootstrap Bundle (includes Popper) -->
+  <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
-  ></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Typing Animation Script (Pure JavaScript) -->
+  <!-- Typing Animation (respects Reduced Motion) -->
   <script>
-    const typingAnimationElement = document.getElementById("typing-animation");
-    const typingTexts = [
-      "Business Analytics Postgrad",
-      "Data Storyteller",
-      "Analytical Strategist"
-    ];
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
+  const typingAnimationElement = document.getElementById("typing-animation");
+  const typingTexts = ["Business Analytics Postgrad","Data Storyteller","Operations & Finance Savvy","Analytical Strategist"];
+  let textIndex = 0, charIndex = 0, isDeleting = false, typingSpeed = 100;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function type() {
-      const currentText = typingTexts[textIndex];
-      if (!isDeleting) {
-        typingAnimationElement.textContent = currentText.slice(0, charIndex++);
-        if (charIndex > currentText.length) {
-          isDeleting = true;
-          setTimeout(type, 1000);
-        } else {
-          setTimeout(type, typingSpeed);
-        }
-      } else {
-        typingAnimationElement.textContent = currentText.slice(0, charIndex--);
-        if (charIndex < 0) {
-          isDeleting = false;
-          textIndex = (textIndex + 1) % typingTexts.length;
-          setTimeout(type, 300);
-        } else {
-          setTimeout(type, typingSpeed);
-        }
-      }
-    }
-    document.addEventListener("DOMContentLoaded", type);
+  function type() {
+    if (!typingAnimationElement) return;
+    if (reduceMotion) { typingAnimationElement.textContent = typingTexts.join(" • "); return; }
+    const currentText = typingTexts[textIndex];
+    typingAnimationElement.textContent = isDeleting ? currentText.slice(0, --charIndex) : currentText.slice(0, ++charIndex);
+    if (!isDeleting && charIndex > currentText.length) { isDeleting = true; return setTimeout(type, 1000); }
+    if (isDeleting && charIndex < 0) { isDeleting = false; textIndex = (textIndex + 1) % typingTexts.length; return setTimeout(type, 300); }
+    setTimeout(type, typingSpeed);
+  }
+  document.addEventListener("DOMContentLoaded", type);
 
-    // BACK TO TOP BUTTON FUNCTIONALITY
-    const backToTop = document.getElementById("back-to-top");
-    window.addEventListener("scroll", () => {
-      if (window.pageYOffset > 300) {
-        backToTop.style.display = "block";
-      } else {
-        backToTop.style.display = "none";
-      }
-    });
-    backToTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+  // Back to top
+  const backToTop = document.getElementById("back-to-top");
+  window.addEventListener("scroll", () => { backToTop.style.display = window.pageYOffset > 300 ? "block" : "none"; });
+  backToTop.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
   </script>
 </body>
 </html>
