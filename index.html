@@ -20,13 +20,13 @@
   <style>
     /* ============ THEME ============ */
     :root{
-      --bg:#0b1024;                /* deep blue */
-      --bg-2:#0f172a;              /* slate-900 */
-      --text:#e5e7eb;              /* gray-200 */
-      --muted:#a1a8b8;             /* gray-400/300 mix */
-      --primary:#ff7a6e;           /* coral */
-      --primary-2:#ff4b3e;         /* deeper coral */
-      --accent:#8b5cf6;            /* violet */
+      --bg:#0b1024;
+      --bg-2:#0f172a;
+      --text:#e5e7eb;
+      --muted:#a1a8b8;
+      --primary:#ff7a6e;
+      --primary-2:#ff4b3e;
+      --accent:#8b5cf6;
       --line:rgba(255,255,255,.14);
       --glass:rgba(255,255,255,.06);
     }
@@ -44,7 +44,6 @@
     a:hover{color:var(--primary-2); text-decoration:none}
 
     /* ============ BACKGROUND MAGIC ============ */
-    /* Animated gradient mesh */
     .mesh{
       position:fixed; inset:-25vmax; z-index:-3; filter:blur(80px); opacity:.95;
       background:
@@ -55,24 +54,18 @@
       animation: meshMove 22s ease-in-out infinite alternate;
     }
     @keyframes meshMove{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-3vmax,2vmax,0) scale(1.04)}}
-
-    /* Soft dot grid overlay */
     .grid-overlay{
       position:fixed; inset:0; z-index:-2; opacity:.12;
       background-image: radial-gradient(#fff 1px, transparent 1px);
       background-size: 22px 22px;
       mix-blend-mode: soft-light;
     }
-
-    /* Cursor glow that follows pointer */
     .cursor-glow{
       position:fixed; width:28vmin; height:28vmin; border-radius:50%;
       background: radial-gradient(circle at center, rgba(255,122,110,.28), transparent 60%);
       pointer-events:none; z-index:-1; filter:blur(24px); transform:translate(-50%,-50%);
       transition: opacity .25s ease;
     }
-
-    /* Floating orbs */
     .orb{position:fixed;border-radius:50%;mix-blend-mode:screen;pointer-events:none;z-index:-2;opacity:.22}
     .orb.one{width:26vmin;height:26vmin;background:#ff7a6e;top:12%;left:6%;animation:float1 14s ease-in-out infinite}
     .orb.two{width:18vmin;height:18vmin;background:#60a5fa;bottom:10%;right:6%;animation:float2 16s ease-in-out infinite}
@@ -80,8 +73,6 @@
     @keyframes float1{50%{transform:translate3d(18px,-10px,0)}}
     @keyframes float2{50%{transform:translate3d(-12px,8px,0)}}
     @keyframes float3{50%{transform:translate3d(10px,14px,0)}}
-
-    /* Scroll progress */
     #scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),#ffd369);width:0%;z-index:9999}
 
     /* ============ NAVBAR ============ */
@@ -100,9 +91,14 @@
     }
     .nav-link:hover:after{right:10%}
 
-    /* ============ HERO ============ */
-    #home{position:relative;min-height:96vh;display:flex;align-items:center}
-    .hero-wrap{width:100%;display:grid;grid-template-columns:1.15fr .85fr;grid-gap:36px;align-items:center}
+    /* ============ HERO (UPDATED) ============ */
+    #home{ position:relative; min-height:96vh; display:flex; align-items:center; }
+    .hero-wrap{
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr 1fr;   /* equal space so Lottie can grow */
+      grid-gap:36px; align-items:center;
+    }
     @media (max-width:992px){.hero-wrap{grid-template-columns:1fr}}
     .glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
     .hero-title{font-size:3.3rem;font-weight:800;margin:0 0 6px;letter-spacing:.2px}
@@ -117,17 +113,17 @@
     .btn-pill{border-radius:999px;padding:12px 22px;transition:transform .2s ease}
     .btn-pill:active{transform:scale(.98)}
     .magnetic{display:inline-block;position:relative}
+    /* new responsive size for the animation */
+    #hero-anim{ display:flex; align-items:center; justify-content:center; }
+    .hero-lottie{ width: clamp(340px, 48vw, 820px); height:auto; }
+    @media (max-width:992px){ .hero-lottie{ width: min(88vw, 560px); } }
 
     /* ============ SECTIONS ============ */
     section{padding:96px 0 90px}
     .section-head{text-align:center;margin-bottom:54px}
     .section-head h2{font-size:2.35rem;font-weight:800;margin-bottom:8px}
     .section-head p{color:var(--muted);max-width:760px;margin:0 auto}
-
-    /* Section separators (SVG waves) */
-    .divider{
-      display:block; width:100%; height:70px; background:transparent; margin-top:-70px;
-    }
+    .divider{ display:block; width:100%; height:70px; background:transparent; margin-top:-70px; }
     .divider svg{display:block; width:100%; height:100%}
 
     /* ============ CARDS / EFFECTS ============ */
@@ -140,19 +136,13 @@
     }
     .card-neo:hover{ transform: translateY(-6px); box-shadow:0 14px 40px rgba(0,0,0,.35) }
     .tilt{transform-style:preserve-3d}
-
     .chip{display:inline-block;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fde5e1;padding:6px 10px;border-radius:999px;font-size:.85rem;margin:0 8px 8px 0}
 
-    /* Skills marquee */
-    .marquee{
-      overflow:hidden; white-space:nowrap; border:1px dashed rgba(255,255,255,.12);
-      border-radius:14px; padding:8px 0; position:relative; background:rgba(255,255,255,.03)
-    }
+    .marquee{ overflow:hidden; white-space:nowrap; border:1px dashed rgba(255,255,255,.12); border-radius:14px; padding:8px 0; background:rgba(255,255,255,.03) }
     .marquee span{display:inline-block; padding:0 18px; animation: slide 18s linear infinite}
     .marquee:hover span{animation-play-state:paused}
     @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-    /* Timeline */
     .resume-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-gap:28px}
     @media (max-width:992px){.resume-grid{grid-template-columns:1fr}}
     .timeline{position:relative;padding-left:28px}
@@ -164,22 +154,15 @@
     .resume-item ul{margin:0;padding-left:18px}
     .resume-item ul li{margin-bottom:6px}
 
-    /* Projects */
     .project-card img{width:100%;height:220px;object-fit:cover;border-top-left-radius:18px;border-top-right-radius:18px}
     .project-card .card-body{padding:18px}
     .project-card .tags small{opacity:.8}
 
-    /* Contact */
     .contact-tile{text-align:center;padding:20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05)}
     .contact-tile i{font-size:2rem;color:var(--primary);margin-bottom:10px}
 
-    /* CTA banner */
-    .cta{
-      background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(255,122,110,.18));
-      border:1px solid var(--line); border-radius:20px;
-    }
+    .cta{ background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(255,122,110,.18)); border:1px solid var(--line); border-radius:20px; }
 
-    /* Footer & BTT */
     footer{border-top:1px solid var(--line); background:rgba(0,0,0,.25)}
     footer p{color:var(--muted); margin:0}
     #backToTop{position:fixed;right:22px;bottom:22px;z-index:99;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -233,7 +216,6 @@
           <p class="hero-sub">Business & Data Analyst • SQL • Python • Power BI • Tableau</p>
           <div id="typing" aria-live="polite"></div>
 
-          <!-- quick value bullets -->
           <ul class="mt-2" style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px;color:#cbd5e1">
             <li>✔ KPI dashboards stakeholders use</li>
             <li>✔ Clean, reliable SQL models</li>
@@ -251,13 +233,15 @@
         </div>
       </div>
       <div class="text-center" id="hero-anim">
-        <!-- Lottie (Flutter-like vector motion) -->
-        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
-          background="transparent" speed="1" style="width:100%;max-width:520px;height:auto" loop autoplay>
+        <!-- bigger, responsive Lottie -->
+        <lottie-player
+          class="hero-lottie"
+          src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
+          background="transparent" speed="1" loop autoplay>
         </lottie-player>
       </div>
     </div>
-    <!-- Decorative divider -->
+
     <div class="divider" aria-hidden="true">
       <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,35 C960,70 1200,20 1440,40 L1440,0 L0,0 Z" fill="url(#g)"></path>
         <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0%" stop-color="#8b5cf6" stop-opacity=".25"/><stop offset="100%" stop-color="#ff7a6e" stop-opacity=".25"/></linearGradient></defs>
@@ -293,7 +277,6 @@
         </div>
       </div>
 
-      <!-- Skills marquee -->
       <div class="marquee mt-4" aria-label="Skills marquee">
         <span>SQL • Python • R • Power BI • Tableau • IBM Cognos • Excel (Advanced) • KPI Design • ETL • Data Modelling • Storytelling • A/B Analysis • SQL • Python • R • Power BI • Tableau • IBM Cognos • Excel (Advanced) • KPI Design • ETL • Data Modelling • Storytelling • A/B Analysis • </span>
       </div>
@@ -343,7 +326,6 @@
       </div>
     </div>
 
-    <!-- Divider -->
     <div class="divider" aria-hidden="true">
       <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,30 C240,80 480,10 720,35 C960,60 1200,10 1440,30 L1440,0 L0,0 Z" fill="url(#g2)"></path>
         <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0%" stop-color="#ff7a6e" stop-opacity=".22"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity=".22"/></linearGradient></defs>
@@ -360,7 +342,6 @@
       </div>
 
       <div class="resume-grid">
-        <!-- Column A -->
         <div class="timeline">
           <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
@@ -385,7 +366,6 @@
           </div>
         </div>
 
-        <!-- Column B -->
         <div class="timeline">
           <div class="resume-item mb-4 reveal">
             <span class="t-dot"></span>
@@ -579,14 +559,11 @@
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-  <!-- Lottie -->
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <script>
-    // Respect reduced motion
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // Navbar & progress
@@ -633,20 +610,18 @@
     if (!prefersReduced && window.gsap && window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
 
-      // Hero parallax (subtle)
+      // Parallax range (feel free to bump 10 -> 16 for more)
       const heroAnim = document.getElementById('hero-anim');
       window.addEventListener('mousemove', (e)=>{
-        const x = (e.clientX / window.innerWidth - .5) * 10;
-        const y = (e.clientY / window.innerHeight - .5) * 10;
+        const x = (e.clientX / window.innerWidth - .5) * 12;
+        const y = (e.clientY / window.innerHeight - .5) * 12;
         heroAnim.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       });
 
-      // Hero entrance
       gsap.from(".hero-title", {y:24, autoAlpha:0, duration:.9, ease:"power4.out"});
       gsap.from(".hero-sub",   {y:24, autoAlpha:0, duration:.9, ease:"power4.out", delay:.1});
       gsap.from("#typing",     {y:18, autoAlpha:0, duration:.9, ease:"power4.out", delay:.2});
 
-      // Scroll reveals
       gsap.utils.toArray('.reveal').forEach((el,i)=>{
         gsap.from(el, {
           scrollTrigger:{trigger:el, start:"top 85%"},
@@ -654,7 +629,7 @@
         });
       });
 
-      // Magnetic buttons (springy)
+      // Magnetic buttons
       document.querySelectorAll('.magnetic').forEach(w=>{
         const btn = w.querySelector('a');
         w.addEventListener('mousemove', e=>{
@@ -666,7 +641,7 @@
         w.addEventListener('mouseleave', ()=> gsap.to(btn, {x:0, y:0, duration:.3, ease:"power3.out"}));
       });
 
-      // Tilt cards (3D)
+      // Tilt cards
       const maxTilt = 10;
       document.querySelectorAll('.tilt').forEach(card=>{
         card.addEventListener('mousemove', (e)=>{
