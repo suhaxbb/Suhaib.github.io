@@ -91,7 +91,7 @@
     }
     .nav-link:hover:after{right:10%}
 
-    /* ============ HERO (UPDATED) ============ */
+    /* ============ HERO (with zoomed Lottie fix) ============ */
     #home{ position:relative; min-height:96vh; display:flex; align-items:center; }
     .hero-wrap{
       width:100%;
@@ -113,10 +113,23 @@
     .btn-pill{border-radius:999px;padding:12px 22px;transition:transform .2s ease}
     .btn-pill:active{transform:scale(.98)}
     .magnetic{display:inline-block;position:relative}
-    /* new responsive size for the animation */
-    #hero-anim{ display:flex; align-items:center; justify-content:center; }
-    .hero-lottie{ width: clamp(340px, 48vw, 820px); height:auto; }
-    @media (max-width:992px){ .hero-lottie{ width: min(88vw, 560px); } }
+
+    /* LOTTIE ZOOM WRAPPER — this fixes “tiny animation” artboards */
+    .lottie-zoom{
+      --scale: 1.85;  /* adjust this if you want the art even bigger */
+      width: clamp(360px, 50vw, 920px);
+      height: clamp(320px, 44vw, 700px);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; /* crop the extra canvas while we zoom in */
+      border-radius: 16px;
+    }
+    .lottie-zoom .hero-lottie{
+      width:100%; height:100%;
+      transform: scale(var(--scale));
+      transform-origin: center;
+    }
+    @media (max-width:1200px){ .lottie-zoom{ --scale:1.6 } }
+    @media (max-width:992px){  .lottie-zoom{ --scale:1.25; width:min(88vw,560px); height:min(64vw,420px);} }
 
     /* ============ SECTIONS ============ */
     section{padding:96px 0 90px}
@@ -232,8 +245,9 @@
           </div>
         </div>
       </div>
-      <div class="text-center" id="hero-anim">
-        <!-- bigger, responsive Lottie -->
+
+      <!-- Zoomed/cropped Lottie so the artwork looks BIG -->
+      <div class="lottie-zoom" id="hero-anim">
         <lottie-player
           class="hero-lottie"
           src="https://assets4.lottiefiles.com/packages/lf20_qp1q7mct.json"
@@ -610,7 +624,7 @@
     if (!prefersReduced && window.gsap && window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
 
-      // Parallax range (feel free to bump 10 -> 16 for more)
+      // Parallax hero (move the whole Lottie wrapper)
       const heroAnim = document.getElementById('hero-anim');
       window.addEventListener('mousemove', (e)=>{
         const x = (e.clientX / window.innerWidth - .5) * 12;
